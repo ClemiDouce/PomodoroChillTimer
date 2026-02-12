@@ -44,8 +44,7 @@ func stop_music():
 	if volume_tween:
 		volume_tween.kill()
 	volume_tween = create_tween()
-	volume_tween.interpolate_property(music_player, "volume_db", music_player.volume_db, - 60, 3, Tween.TRANS_LINEAR, 
-		Tween.EASE_IN)
+	volume_tween.tween_property(music_player, "volume_db", -60, 3)
 	await volume_tween.finished
 	music_player.stop()
 	music_player.volume_db = 0
@@ -54,8 +53,7 @@ func music_out():
 	if volume_tween:
 		volume_tween.kill()
 	volume_tween = create_tween()
-	volume_tween.interpolate_property(music_player, "volume_db", 0, - 60, 3, Tween.TRANS_LINEAR, 
-		Tween.EASE_IN)
+	volume_tween.tween_property(music_player, "volume_db",- 60, 3)
 
 func music_in():
 	if volume_tween:
