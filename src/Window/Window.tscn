@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprite/lights/light_fenetre.png" type="Texture2D" id=1]
+[ext_resource path="res://src/Window/Window.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprite/lights/light_cercle.png" type="Texture2D" id=3]
+
+[node name="window" type="Sprite2D"]
+visible = false
+position = Vector2( 98.5137, 83.1561 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 3
+script = ExtResource( 2 )
+size = 4
+
+[node name="Wink" type="Timer" parent="."]
+
+[node name="Light3D" type="Sprite2D" parent="."]
+texture = ExtResource( 3 )
+vframes = 9
+hframes = 3
+[connection signal="timeout" from="Wink" to="." method="_on_Wink_timeout"]

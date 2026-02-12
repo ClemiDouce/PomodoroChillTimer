@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://bk7nnnpllf8mb"]
+
+[ext_resource type="PackedScene" path="res://src/WindowManager/WindowManager.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/Window/Window.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://dayfctp0o0ds8" path="res://assets/sprite/plans/1er_plan.png" id="3"]
+
+[node name="Plan1" type="Node2D" unique_id=126373302]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1085352997]
+scale = Vector2(3, 3)
+texture = ExtResource("3")
+centered = false
+
+[node name="WindowManager" parent="." unique_id=1167531004 instance=ExtResource("1")]
+
+[node name="window" parent="WindowManager/Windows" index="0" unique_id=1710476472 instance=ExtResource("2")]
+position = Vector2(-3, 189)
+frame = 1
+size = 0
+
+[node name="window2" parent="WindowManager/Windows" index="1" unique_id=1743824136 instance=ExtResource("2")]
+position = Vector2(39, 189)
+frame = 1
+size = 0
+
+[node name="window3" parent="WindowManager/Windows" index="2" unique_id=933052375 instance=ExtResource("2")]
+position = Vector2(78, 189)
+size = 0
+
+[node name="window4" parent="WindowManager/Windows" index="3" unique_id=1078206260 instance=ExtResource("2")]
+position = Vector2(-3, 240)
+size = 0
+
+[node name="window5" parent="WindowManager/Windows" index="4" unique_id=1461038164 instance=ExtResource("2")]
+position = Vector2(39, 240)
+frame = 2
+size = 0
+
+[node name="window6" parent="WindowManager/Windows" index="5" unique_id=815988803 instance=ExtResource("2")]
+position = Vector2(78, 240)
+frame = 2
+size = 0
+
+[node name="window7" parent="WindowManager/Windows" index="6" unique_id=1919568703 instance=ExtResource("2")]
+position = Vector2(-3, 291)
+frame = 2
+size = 0
+
+[node name="window8" parent="WindowManager/Windows" index="7" unique_id=426170461 instance=ExtResource("2")]
+position = Vector2(39, 291)
+frame = 1
+size = 0
+
+[node name="window9" parent="WindowManager/Windows" index="8" unique_id=1356472405 instance=ExtResource("2")]
+position = Vector2(78, 291)
+frame = 2
+size = 0
+
+[node name="window10" parent="WindowManager/Windows" index="9" unique_id=989034349 instance=ExtResource("2")]
+position = Vector2(-3, 342)
+frame = 1
+size = 0
+
+[node name="window11" parent="WindowManager/Windows" index="10" unique_id=290657068 instance=ExtResource("2")]
+position = Vector2(39, 342)
+frame = 2
+size = 0
+
+[node name="window12" parent="WindowManager/Windows" index="11" unique_id=919843393 instance=ExtResource("2")]
+position = Vector2(78, 342)
+frame = 1
+size = 0
+
+[node name="window13" parent="WindowManager/Windows" index="12" unique_id=1631195175 instance=ExtResource("2")]
+position = Vector2(-3, 393)
+frame = 2
+size = 0
+
+[node name="window14" parent="WindowManager/Windows" index="13" unique_id=2011017549 instance=ExtResource("2")]
+position = Vector2(39, 393)
+frame = 1
+size = 0
+
+[node name="window15" parent="WindowManager/Windows" index="14" unique_id=885563633 instance=ExtResource("2")]
+position = Vector2(78, 393)
+size = 0
+
+[editable path="WindowManager"]
