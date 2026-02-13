@@ -2,14 +2,16 @@ class_name MainScreen extends Node2D
 
 # Buttons
 @onready var coffee_machine_button: InteractionArea = %CoffeeMachineButton
-#TODO: Survoler le livre fait apparaitre le screen d'aide
-#@onready var help_book_button: InteractionArea = %HelpBookButton
+@onready var help_book_button: InteractionArea = %HelpBookButton
 @onready var options_button: InteractionArea = %OptionsButton
 @onready var credits_button: InteractionArea = %CreditsButton
 @onready var credit_animation: AnimationPlayer = %CreditAnimation
 @onready var option_animation: AnimationPlayer = %OptionAnimation
 @onready var pomo_animation: AnimationPlayer = %PomoAnimation
 
+@onready var welcome_screen: Control = %WelcomeScreen
+@onready var help_screen: Control = %HelpScreen
+@onready var hide_help: Button = %HideHelp
 # Light
 @onready var light_animation_player: AnimationPlayer = %LightAnimationPlayer
 
@@ -22,15 +24,21 @@ func _connect_signals():
 	coffee_machine_button.clicked.connect(_on_coffee_machine_clicked)
 	options_button.clicked.connect(_on_option_button_clicked)
 	credits_button.clicked.connect(_on_credits_button_clicked)
+	help_book_button.clicked.connect(_on_help_button_clicked)
 	
 	credit_animation.animation_finished.connect(_on_credit_animation_changed)
 	option_animation.animation_finished.connect(_on_option_animation_changed)
 	pomo_animation.animation_finished.connect(_on_pomo_animation_changed)
 	
+	hide_help.pressed.connect(func(): help_screen.hide())
+	
 func _ready() -> void:
 	_connect_signals()
 
 func _hide_all_panels():
+	if welcome_screen.visible:
+		welcome_screen.hide()
+	
 	if credit_panel:
 		credit_animation.play("opt_out")
 	if option_panel:
@@ -68,6 +76,10 @@ func _on_credits_button_clicked():
 	else:
 		_hide_all_panels()
 		credit_animation.play("opt_in")
+
+func _on_help_button_clicked():
+	_hide_all_panels()
+	help_screen.show()
 
 func _on_credit_animation_changed(animation_name: String):
 	credit_panel = animation_name == "opt_in"

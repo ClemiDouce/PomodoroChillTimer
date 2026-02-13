@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dm6x3qg1836mp" path="res://content/background/background.tscn" id="1_3ectx"]
 [ext_resource type="Script" uid="uid://bh2ut52fev1gr" path="res://screen/main_screen/new_main_screen.gd" id="1_ppmac"]
+[ext_resource type="Script" uid="uid://dhkto4laohs61" path="res://content/panels/pomo_creator_panel.gd" id="3_jd6gy"]
 [ext_resource type="FontFile" path="res://assets/fonts/SmallPixelFont.tres" id="3_ny7tl"]
 [ext_resource type="Texture2D" uid="uid://djk8jy7buckh2" path="res://assets/sprite/GUI/cross.png" id="4_wtnci"]
 [ext_resource type="FontFile" path="res://assets/fonts/PixelFont.tres" id="5_1t4xr"]
+[ext_resource type="Theme" uid="uid://bskg8i0qvk7ee" path="res://assets/theme/global_theme.tres" id="5_ehmk6"]
 [ext_resource type="Script" uid="uid://b5g2ndu7u6bbj" path="res://content/panels/credits_panel.gd" id="5_fmb51"]
 [ext_resource type="Script" uid="uid://bmitvdp74pu6n" path="res://content/component/quit_button_panel.gd" id="5_mlxjn"]
 [ext_resource type="Texture2D" uid="uid://cjtanwwo4v8gn" path="res://assets/ui/button_square_depth_border.png" id="6_nyafg"]
@@ -16,6 +18,7 @@
 [ext_resource type="Script" uid="uid://iy7dtwrphb0m" path="res://content/component/session_control.gd" id="12_bfbtr"]
 [ext_resource type="Texture2D" uid="uid://dd0yvt4er3xd7" path="res://assets/sprite/GUI/musicOn.png" id="12_qfccc"]
 [ext_resource type="Texture2D" uid="uid://dubdgxp4lia7b" path="res://assets/sprite/GUI/musicOff.png" id="13_5pi0t"]
+[ext_resource type="Script" uid="uid://bn0ks1ti64rr4" path="res://content/component/welcome_screen.gd" id="13_ehmk6"]
 [ext_resource type="Texture2D" uid="uid://c0al02im8q46r" path="res://assets/sprite/front_sombre.png" id="14_ad4v5"]
 [ext_resource type="Texture2D" uid="uid://cl4bykyq73dp5" path="res://assets/sprite/machine2.png" id="15_5pi0t"]
 [ext_resource type="Script" uid="uid://24yfo0k80qmo" path="res://content/coffee_machine/coffee_machine.gd" id="16_ekd82"]
@@ -214,15 +217,24 @@ bg_color = Color(1, 0.5725419, 0.6169771, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtx58"]
 
-[sub_resource type="Theme" id="Theme_qfccc"]
-default_font = ExtResource("5_1t4xr")
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pi0t"]
 texture = ExtResource("6_nyafg")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 12.0
+
+[sub_resource type="Theme" id="Theme_qfccc"]
+default_font = ExtResource("5_1t4xr")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jd6gy"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ehmk6"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_5edtc"]
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jewp"]
 font = ExtResource("21_0tj6c")
@@ -404,13 +416,15 @@ libraries/ = SubResource("AnimationLibrary_wh45n")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_sbhjy")
 
-[node name="CyclePanel" type="Control" parent="UI/Panels" unique_id=1890541630]
+[node name="CyclePanel" type="Control" parent="UI/Panels" unique_id=1890541630 node_paths=PackedStringArray("animation_player")]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 362.844
 offset_top = 170.0
 offset_right = 581.00006
 offset_bottom = 398.9997
+script = ExtResource("3_jd6gy")
+animation_player = NodePath("../PomoAnimation")
 
 [node name="Panel" type="PanelContainer" parent="UI/Panels/CyclePanel" unique_id=1157501019]
 layout_mode = 1
@@ -431,12 +445,12 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer" unique_id=873764055]
 layout_mode = 2
 
-[node name="Titre" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=584913218]
+[node name="Title" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=584913218]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 theme_override_font_sizes/font_size = 24
-text = "Session Creator"
+text = "Pomo Creator"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -449,7 +463,7 @@ layout_mode = 2
 theme_override_constants/h_separation = 20
 columns = 2
 
-[node name="LabelCycle" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=223670614]
+[node name="CycleLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=223670614]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
@@ -457,16 +471,20 @@ theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "Cycles:"
 horizontal_alignment = 1
 
-[node name="InputCycle" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1397507082]
+[node name="CycleInput" type="SpinBox" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1120496841]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
-theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-placeholder_text = "0"
+size_flags_horizontal = 3
+theme = ExtResource("5_ehmk6")
+min_value = 1.0
+max_value = 400.0
+value = 3.0
+rounded = true
+suffix = "Loop"
+custom_arrow_step = 1.0
+select_all_on_focus = true
 
-[node name="LabelTravail" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=144199627]
+[node name="WorkLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=144199627]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
@@ -475,21 +493,23 @@ text = "Work :"
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1163699777]
 layout_mode = 2
 
-[node name="InputTravail" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=55908077]
+[node name="WorkInput" type="SpinBox" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=1352160072]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
-theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-placeholder_text = "0"
+size_flags_horizontal = 3
+min_value = 3.0
+value = 25.0
+suffix = "Minutes"
+select_all_on_focus = true
 
-[node name="LabelTravail2" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=469824270]
+[node name="WorkMinutesLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=469824270]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "minutes"
 
-[node name="LabelPauseCourte" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=916307110]
+[node name="ShortBreakLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=916307110]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
@@ -498,21 +518,23 @@ text = "Short Break :"
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=821868479]
 layout_mode = 2
 
-[node name="InputCourte" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=1055452871]
+[node name="ShortBreakInput" type="SpinBox" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=230615719]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
-theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-placeholder_text = "0"
+size_flags_horizontal = 3
+min_value = 3.0
+value = 5.0
+suffix = "Minutes"
+select_all_on_focus = true
 
-[node name="LabelTravail3" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=802481042]
+[node name="ShortBreakMinutesLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=802481042]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "minutes"
 
-[node name="LabelPauseLongue" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1017357485]
+[node name="LongBreakLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1017357485]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
@@ -521,21 +543,17 @@ text = "Long Break :"
 [node name="HBoxContainer4" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=75839929]
 layout_mode = 2
 
-[node name="InputLongue" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=1894511105]
+[node name="LongBreakInput" type="SpinBox" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=479152453]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
-theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-placeholder_text = "0"
-context_menu_enabled = false
-emoji_menu_enabled = false
-shortcut_keys_enabled = false
-middle_mouse_paste_enabled = false
-drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
+size_flags_horizontal = 3
+min_value = 3.0
+value = 10.0
+suffix = "Minutes"
+select_all_on_focus = true
 
-[node name="LabelTravail4" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=440003176]
+[node name="LongBreakMinutesLabel" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=440003176]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
@@ -545,12 +563,12 @@ text = "minutes"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ButtonValider" type="Button" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1327495444]
+[node name="ValidateButton" type="Button" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1327495444]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "Start"
 
-[node name="Quit" type="TextureButton" parent="UI/Panels/CyclePanel" unique_id=1421071589]
+[node name="QuitButton" type="TextureButton" parent="UI/Panels/CyclePanel" unique_id=1421071589]
 modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
 layout_mode = 0
 offset_left = 205.156
@@ -801,6 +819,71 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("4_wtnci")
 script = ExtResource("5_mlxjn")
 
+[node name="WelcomeScreen" type="Control" parent="UI/Panels" unique_id=846349483]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 181.0
+offset_right = 330.0
+offset_bottom = 344.0
+script = ExtResource("13_ehmk6")
+
+[node name="WelcomePanel" type="PanelContainer" parent="UI/Panels/WelcomeScreen" unique_id=78369479]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5pi0t")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/WelcomeScreen/WelcomePanel" unique_id=778824481]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/WelcomeScreen/WelcomePanel/MarginContainer" unique_id=315022176]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="UI/Panels/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1461521370]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "Welcome in Pomodoro Chill!"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="UI/Panels/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1216401491]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "This application allows you to practice the Pomodoro method, which involves sessions consisting of work cycles interspersed with breaks.
+To get started, click on the coffee pot and create your own session, then click on \"Start\" to get started!
+Work well and have fun!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Quit" type="TextureButton" parent="UI/Panels/WelcomeScreen" unique_id=2010251692]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = -7.0
+offset_right = 32.0
+offset_bottom = 43.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_wtnci")
+script = ExtResource("5_mlxjn")
+
 [node name="HelpScreen" type="Control" parent="UI/Panels" unique_id=1182440489]
 unique_name_in_owner = true
 visible = false
@@ -818,29 +901,30 @@ color = Color(0.0980392, 0.0901961, 0.0901961, 0.415686)
 
 [node name="Help" type="Label" parent="UI/Panels/HelpScreen" unique_id=70352199]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 572.0
-offset_right = 197.0
-offset_bottom = 600.0
-text = "HELP"
+offset_left = 120.0
+offset_top = 579.0
+offset_right = 207.0
+offset_bottom = 607.0
+text = "Show Controls"
 
 [node name="Credits" type="Label" parent="UI/Panels/HelpScreen" unique_id=1754497160]
 layout_mode = 0
 offset_left = 47.0
-offset_top = 509.0
+offset_top = 493.0
 offset_right = 137.0
-offset_bottom = 537.0
+offset_bottom = 521.0
 text = "Credits"
+label_settings = SubResource("LabelSettings_jd6gy")
 
 [node name="Launch" type="Label" parent="UI/Panels/HelpScreen" unique_id=2089914871]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 445.0
-offset_right = 348.0
-offset_bottom = 535.0
-text = "Show
-Session
+offset_left = 233.0
+offset_top = 442.0
+offset_right = 349.0
+offset_bottom = 532.0
+text = "Pomodoro
 Creator"
+label_settings = SubResource("LabelSettings_ehmk6")
 
 [node name="Mute" type="Label" parent="UI/Panels/HelpScreen" unique_id=901333853]
 layout_mode = 0
@@ -874,68 +958,42 @@ horizontal_alignment = 2
 
 [node name="Options" type="Label" parent="UI/Panels/HelpScreen" unique_id=2101619518]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 6.0
-offset_right = 154.0
-offset_bottom = 34.0
+offset_left = 65.0
+offset_top = 12.0
+offset_right = 155.0
+offset_bottom = 40.0
 text = "Options"
+label_settings = SubResource("LabelSettings_5edtc")
 
 [node name="HideHelp" type="Button" parent="UI/Panels/HelpScreen" unique_id=1191667755]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 237.0
-offset_top = 561.0
-offset_right = 355.0
-offset_bottom = 595.0
+offset_left = 129.0
+offset_top = 268.0
+offset_right = 247.0
+offset_bottom = 302.0
 text = "Hide Help"
 
-[node name="WelcomeScreen" type="Control" parent="UI/Panels/HelpScreen" unique_id=846349483]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 17.0
-offset_top = 181.0
-offset_right = 330.0
-offset_bottom = 344.0
+[node name="TextureRect" type="TextureRect" parent="UI/Panels/HelpScreen" unique_id=576679129]
+layout_mode = 0
+offset_left = 256.0
+offset_right = 306.0
+offset_bottom = 50.0
+texture = ExtResource("4_wtnci")
 
-[node name="WelcomePanel" type="PanelContainer" parent="UI/Panels/HelpScreen/WelcomeScreen" unique_id=78369479]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_right = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_5pi0t")
+[node name="TextureRect2" type="TextureRect" parent="UI/Panels/HelpScreen" unique_id=90859627]
+layout_mode = 0
+offset_left = 202.0
+offset_right = 252.0
+offset_bottom = 50.0
+texture = ExtResource("10_j4pta")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel" unique_id=778824481]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer" unique_id=315022176]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Title" type="Label" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1461521370]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_font_sizes/font_size = 24
-text = "Welcome in Pomodoro Chill!"
-horizontal_alignment = 1
-
-[node name="Desc" type="Label" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1216401491]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-text = "This application allows you to practice the Pomodoro method, which involves sessions consisting of work cycles interspersed with breaks.
-To get started, click on the coffee pot and create your own session, then click on \"Start\" to get started!
-Work well and have fun!"
-horizontal_alignment = 1
-autowrap_mode = 3
+[node name="TextureRect3" type="TextureRect" parent="UI/Panels/HelpScreen" unique_id=402268905]
+layout_mode = 0
+offset_left = 310.0
+offset_right = 360.0
+offset_bottom = 50.0
+texture = ExtResource("12_qfccc")
 
 [node name="PomoDisplay" type="Control" parent="UI" unique_id=2142575820]
 unique_name_in_owner = true
@@ -988,10 +1046,6 @@ offset_right = 325.0
 offset_bottom = 455.0
 text = "00:00"
 label_settings = SubResource("LabelSettings_jtx58")
-
-[node name="CycleTimer" type="Timer" parent="UI/PomoDisplay" unique_id=599274428]
-unique_name_in_owner = true
-one_shot = true
 
 [node name="SessionControl" type="Control" parent="UI" unique_id=633899162]
 unique_name_in_owner = true
@@ -1083,21 +1137,23 @@ texture = ExtResource("16_mf70w")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="HelpBookButton" type="Area2D" parent="InteractibleButtons/HelpBookSprite" unique_id=1773428857 groups=["clickable"]]
+[node name="HelpBookButton" type="Area2D" parent="InteractibleButtons/HelpBookSprite" unique_id=1773428857 node_paths=PackedStringArray("sprite", "action_label") groups=["clickable"]]
 unique_name_in_owner = true
 position = Vector2(23, 27.333334)
+script = ExtResource("17_ju2sf")
+sprite = NodePath("..")
+action_label = NodePath("../Label")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/HelpBookSprite/HelpBookButton" unique_id=768375225]
 position = Vector2(-8.25, -18.666672)
 shape = SubResource("RectangleShape2D_ju2sf")
 
 [node name="Label" type="Label" parent="InteractibleButtons/HelpBookSprite" unique_id=103305475]
-visible = false
 z_index = 1
 offset_left = 2.6666667
-offset_top = -17.333334
+offset_top = -11.0
 offset_right = 26.666666
-offset_bottom = 5.666666
+offset_bottom = 12.0
 text = "Help"
 label_settings = SubResource("LabelSettings_ppmac")
 
@@ -1196,13 +1252,14 @@ libraries/ = SubResource("AnimationLibrary_bfbtr")
 autoplay = &"default"
 speed_scale = 0.7
 
-[connection signal="pressed" from="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/ButtonValider" to="UI/Panels/CyclePanel" method="_on_ButtonValider_pressed"]
-[connection signal="pressed" from="UI/Panels/CyclePanel/Quit" to="UI/Panels/CyclePanel" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/ValidateButton" to="UI/Panels/CyclePanel" method="_on_validate_button_pressed"]
+[connection signal="pressed" from="UI/Panels/CyclePanel/QuitButton" to="UI/Panels/CyclePanel" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/Panels/CreditsPanel/Quit" to="UI/Panels/CreditsPanel" method="_on_quit_pressed"]
 [connection signal="value_changed" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="UI/Panels/OptionPanel" method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="UI/Panels/OptionPanel" method="_on_break_music_toggled"]
 [connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/OldTimerStyle" to="UI/Panels/OptionPanel" method="_on_old_timer_style_toggled"]
 [connection signal="pressed" from="UI/Panels/OptionPanel/Quit" to="UI/Panels/OptionPanel" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Panels/WelcomeScreen/Quit" to="UI/Panels/WelcomeScreen" method="_on_quit_pressed"]
 [connection signal="toggled" from="UI/SessionControl/SessionControlButtons/PauseButton" to="UI/SessionControl" method="_on_pause_button_toggled"]
 [connection signal="pressed" from="UI/SessionControl/SessionControlButtons/StopButton" to="UI/SessionControl" method="_on_stop_button_pressed"]
 [connection signal="toggled" from="UI/SessionControl/SessionControlButtons/MuteButton" to="UI/SessionControl" method="_on_mute_button_toggled"]

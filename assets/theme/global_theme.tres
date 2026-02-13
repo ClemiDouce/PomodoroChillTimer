@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://tpc5wxwophx1" path="res://assets/ui/button_square_depth_flat.png" id="1_rdipq"]
 [ext_resource type="Texture2D" uid="uid://cjtanwwo4v8gn" path="res://assets/ui/button_square_depth_border.png" id="1_yl55j"]
 [ext_resource type="Texture2D" uid="uid://b7pt1rhsdy0gm" path="res://assets/ui/button_square_flat.png" id="2_7ajo8"]
+[ext_resource type="FontFile" uid="uid://m3slkepqolam" path="res://assets/fonts/m6x11.ttf" id="4_7ajo8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4rctb"]
 texture = ExtResource("1_rdipq")
@@ -26,6 +27,7 @@ texture_margin_right = 8.0
 texture_margin_bottom = 12.0
 
 [resource]
+default_font = ExtResource("4_7ajo8")
 Button/styles/hover = SubResource("StyleBoxTexture_4rctb")
 Button/styles/hover_pressed = SubResource("StyleBoxTexture_h0rfk")
 Button/styles/normal = SubResource("StyleBoxTexture_4rctb")

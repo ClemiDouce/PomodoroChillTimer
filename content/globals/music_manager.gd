@@ -36,7 +36,7 @@ enum InterfaceSound {
 @onready var interface_sound_player: AudioStreamPlayer = %InterfaceSoundPlayer
 
 # Settings
-var music_level : float = 50
+var music_level : float = 50: set = set_music_level
 var intro_passed : bool = false
 var music_pause_position : float = 0.
 
