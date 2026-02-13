@@ -17,8 +17,7 @@
 [ext_resource type="FontFile" uid="uid://m3slkepqolam" path="res://assets/fonts/m6x11.ttf" id="15"]
 [ext_resource type="Texture2D" uid="uid://cvgjb0hlast8b" path="res://assets/sprite/lumiere-Sheet.png" id="16"]
 [ext_resource type="Texture2D" uid="uid://c0al02im8q46r" path="res://assets/sprite/front_sombre.png" id="17"]
-[ext_resource type="PackedScene" path="res://src/Clickable/Clickable.tscn" id="18"]
-[ext_resource type="PackedScene" path="res://src/Stars/Star.tscn" id="19"]
+[ext_resource type="PackedScene" uid="uid://dmftk8r1piqfm" path="res://src/Clickable/clickable.tscn" id="18"]
 [ext_resource type="Texture2D" uid="uid://lrdq84xvtp0l" path="res://assets/sprite/books_credit.png" id="20"]
 [ext_resource type="Texture2D" uid="uid://bi2mqv6fve1tu" path="res://assets/sprite/option_icon.png" id="21"]
 [ext_resource type="Texture2D" uid="uid://b43wt0psg47gp" path="res://assets/sprite/help_book.png" id="22"]
@@ -56,32 +55,47 @@ void fragment()
     COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0));
 }"
 
-[sub_resource type="ShaderMaterial" id="2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48wxl"]
+resource_local_to_scene = true
 shader = SubResource("1")
 shader_parameter/width = 0.0
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(32, 80)
+[sub_resource type="Shader" id="Shader_keof1"]
+code = "shader_type canvas_item;
+ 
+uniform float width;
+uniform vec4 outline_color : source_color;
+ 
+void fragment()
+{
+    vec2 size = (vec2(width) * TEXTURE_PIXEL_SIZE);
+   
+    vec4 sprite_color = texture(TEXTURE, UV);
+   
+    float alpha = sprite_color.a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+   
+    vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a);
+    COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0));
+}"
 
 [sub_resource type="ShaderMaterial" id="4"]
-shader = SubResource("1")
+shader = SubResource("Shader_keof1")
 shader_parameter/width = 0.0
 shader_parameter/outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="5"]
-size = Vector2(116, 164)
 
 [sub_resource type="ShaderMaterial" id="6"]
-shader = SubResource("1")
+shader = SubResource("Shader_keof1")
 shader_parameter/width = 0.0
 shader_parameter/outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="7"]
-size = Vector2(72, 36)
-
-[sub_resource type="RectangleShape2D" id="8"]
-size = Vector2(68, 46)
 
 [sub_resource type="Theme" id="9"]
 default_font = ExtResource("13")
@@ -303,278 +317,68 @@ script = ExtResource("4")
 
 [node name="Plan4" parent="Background" unique_id=888854029 instance=ExtResource("9")]
 
-[node name="Background" parent="Background/Plan4" index="0"]
-position = Vector2(-0.396851, 0)
-
-[node name="WindowManager" parent="Background/Plan4" index="1"]
-time_for_change = 60.0
-max_window = 3
-
-[node name="window9" parent="Background/Plan4/WindowManager/Windows" index="0"]
-frame = 12
-
-[node name="window12" parent="Background/Plan4/WindowManager/Windows" index="3"]
-frame = 12
-
-[node name="window13" parent="Background/Plan4/WindowManager/Windows" index="4"]
-frame = 13
-
-[node name="window14" parent="Background/Plan4/WindowManager/Windows" index="5"]
-frame = 12
-
-[node name="window16" parent="Background/Plan4/WindowManager/Windows" index="7"]
-frame = 13
-
-[node name="window3" parent="Background/Plan4/WindowManager/Windows" index="9"]
-frame = 11
-
-[node name="window4" parent="Background/Plan4/WindowManager/Windows" index="10"]
-frame = 9
-
-[node name="window5" parent="Background/Plan4/WindowManager/Windows" index="11"]
-frame = 9
-
-[node name="window6" parent="Background/Plan4/WindowManager/Windows" index="12"]
-frame = 9
-
-[node name="window19" parent="Background/Plan4/WindowManager/Windows" index="16"]
-frame = 3
-
-[node name="window20" parent="Background/Plan4/WindowManager/Windows" index="17"]
-frame = 5
-
-[node name="window22" parent="Background/Plan4/WindowManager/Windows" index="19"]
-frame = 3
-
 [node name="Plan3" parent="Background" unique_id=30601355 instance=ExtResource("11")]
-
-[node name="WindowManager" parent="Background/Plan3" index="1"]
-time_for_change = 60.0
-max_window = 3
-
-[node name="window4" parent="Background/Plan3/WindowManager/Windows" index="0"]
-frame = 3
-
-[node name="window3" parent="Background/Plan3/WindowManager/Windows" index="2"]
-frame = 5
 
 [node name="Plan2" parent="Background" unique_id=1191185085 instance=ExtResource("10")]
 
-[node name="WindowManager" parent="Background/Plan2" index="1"]
-time_for_change = 60.0
-max_window = 3
-
-[node name="window" parent="Background/Plan2/WindowManager/Windows" index="0"]
-frame = 4
-
-[node name="window3" parent="Background/Plan2/WindowManager/Windows" index="2"]
-frame = 4
-
-[node name="window4" parent="Background/Plan2/WindowManager/Windows" index="3"]
-frame = 3
-
-[node name="window5" parent="Background/Plan2/WindowManager/Windows" index="4"]
-frame = 4
-
-[node name="window14" parent="Background/Plan2/WindowManager/Windows" index="5"]
-frame = 5
-
-[node name="window7" parent="Background/Plan2/WindowManager/Windows" index="7"]
-frame = 7
-
-[node name="window8" parent="Background/Plan2/WindowManager/Windows" index="8"]
-frame = 6
-
-[node name="window10" parent="Background/Plan2/WindowManager/Windows" index="10"]
-frame = 8
-
-[node name="window12" parent="Background/Plan2/WindowManager/Windows" index="12"]
-frame = 7
-
-[node name="window13" parent="Background/Plan2/WindowManager/Windows" index="13"]
-frame = 7
-
 [node name="Plan1" parent="Background" unique_id=1721985885 instance=ExtResource("8")]
 
-[node name="WindowManager" parent="Background/Plan1" index="1" unique_id=1167531004]
-time_for_change = 60.0
-max_window = 3
+[node name="InteractibleButtons" type="Node2D" parent="." unique_id=909799916]
 
-[node name="window2" parent="Background/Plan1/WindowManager/Windows" index="1" unique_id=1743824136]
-frame = 2
-
-[node name="window3" parent="Background/Plan1/WindowManager/Windows" index="2" unique_id=933052375]
-frame = 1
-
-[node name="window4" parent="Background/Plan1/WindowManager/Windows" index="3" unique_id=1078206260]
-frame = 2
-
-[node name="window5" parent="Background/Plan1/WindowManager/Windows" index="4" unique_id=1461038164]
-frame = 0
-
-[node name="window6" parent="Background/Plan1/WindowManager/Windows" index="5" unique_id=815988803]
-frame = 1
-
-[node name="window7" parent="Background/Plan1/WindowManager/Windows" index="6" unique_id=1919568703]
-frame = 0
-
-[node name="window8" parent="Background/Plan1/WindowManager/Windows" index="7" unique_id=426170461]
-frame = 2
-
-[node name="window9" parent="Background/Plan1/WindowManager/Windows" index="8" unique_id=1356472405]
-frame = 1
-
-[node name="window10" parent="Background/Plan1/WindowManager/Windows" index="9" unique_id=989034349]
-frame = 2
-
-[node name="window11" parent="Background/Plan1/WindowManager/Windows" index="10" unique_id=290657068]
-frame = 0
-
-[node name="window12" parent="Background/Plan1/WindowManager/Windows" index="11" unique_id=919843393]
-frame = 2
-
-[node name="window13" parent="Background/Plan1/WindowManager/Windows" index="12" unique_id=1631195175]
-frame = 1
-
-[node name="window14" parent="Background/Plan1/WindowManager/Windows" index="13" unique_id=2011017549]
-frame = 0
-
-[node name="window15" parent="Background/Plan1/WindowManager/Windows" index="14" unique_id=885563633]
-frame = 1
-
-[node name="Node2D" type="Node2D" parent="Background" unique_id=1004845044]
-
-[node name="Sprite2D" parent="Background/Node2D" unique_id=1150742810 instance=ExtResource("19")]
-position = Vector2(17, 96)
-
-[node name="Sprite2" parent="Background/Node2D" unique_id=2006136663 instance=ExtResource("19")]
-position = Vector2(54, 108)
-
-[node name="Sprite3" parent="Background/Node2D" unique_id=1747777359 instance=ExtResource("19")]
-position = Vector2(94, 95)
-
-[node name="Sprite4" parent="Background/Node2D" unique_id=805885004 instance=ExtResource("19")]
-position = Vector2(111, 128)
-
-[node name="Sprite5" parent="Background/Node2D" unique_id=1957072731 instance=ExtResource("19")]
-position = Vector2(163, 150)
-
-[node name="Sprite6" parent="Background/Node2D" unique_id=385299099 instance=ExtResource("19")]
-position = Vector2(172, 101)
-
-[node name="Sprite7" parent="Background/Node2D" unique_id=1548624039 instance=ExtResource("19")]
-position = Vector2(221, 132)
-
-[node name="Sprite8" parent="Background/Node2D" unique_id=1958108982 instance=ExtResource("19")]
-position = Vector2(263, 105)
-
-[node name="Sprite9" parent="Background/Node2D" unique_id=840822697 instance=ExtResource("19")]
-position = Vector2(309, 138)
-
-[node name="Sprite10" parent="Background/Node2D" unique_id=613953703 instance=ExtResource("19")]
-position = Vector2(323, 96)
-
-[node name="Sprite11" parent="Background/Node2D" unique_id=1200853563 instance=ExtResource("19")]
-position = Vector2(344, 163)
-
-[node name="Sprite12" parent="Background/Node2D" unique_id=944934782 instance=ExtResource("19")]
-position = Vector2(345, 201)
-
-[node name="Sprite13" parent="Background/Node2D" unique_id=341253582 instance=ExtResource("19")]
-position = Vector2(304, 207)
-
-[node name="Sprite14" parent="Background/Node2D" unique_id=460724525 instance=ExtResource("19")]
-position = Vector2(269, 159)
-
-[node name="front_sombre" type="Sprite2D" parent="Background" unique_id=116011017]
-scale = Vector2(3, 3)
-texture = ExtResource("17")
-centered = false
-
-[node name="Livre" parent="Background" unique_id=1092705995 instance=ExtResource("18")]
+[node name="Livre" parent="InteractibleButtons" unique_id=1092705995 instance=ExtResource("18")]
 unique_name_in_owner = true
 position = Vector2(93, 528)
 
-[node name="Sprite2D" parent="Background/Livre" index="0"]
-material = SubResource("2")
+[node name="Sprite2D" parent="InteractibleButtons/Livre" index="0" unique_id=1549538798]
+material = SubResource("ShaderMaterial_48wxl")
 texture = ExtResource("20")
 
-[node name="CollisionShape2D" parent="Background/Livre" index="1"]
-shape = SubResource("3")
-
-[node name="Title" parent="Background/Livre" index="2"]
-offset_left = -47.0
-offset_top = -65.0
-offset_right = 43.0
-offset_bottom = -37.0
-text = "Credits"
-
-[node name="Cafetiere" parent="Background" unique_id=606498488 instance=ExtResource("18")]
+[node name="Cafetiere" parent="InteractibleButtons" unique_id=606498488 instance=ExtResource("18")]
 unique_name_in_owner = true
 position = Vector2(294, 486)
 
-[node name="Sprite2D" parent="Background/Cafetiere" index="0"]
+[node name="Sprite2D" parent="InteractibleButtons/Cafetiere" index="0" unique_id=1549538798]
 material = SubResource("4")
 texture = ExtResource("14")
 hframes = 2
 
-[node name="CollisionShape2D" parent="Background/Cafetiere" index="1"]
-shape = SubResource("5")
-
-[node name="Title" parent="Background/Cafetiere" index="2"]
-offset_left = -146.0
-offset_top = -87.0
-offset_right = -48.0
-offset_bottom = -28.0
-text = "Session
-Creator"
-
-[node name="HelpBook" parent="Background" unique_id=1791533729 instance=ExtResource("18")]
+[node name="HelpBook" parent="InteractibleButtons" unique_id=1791533729 instance=ExtResource("18")]
 unique_name_in_owner = true
 position = Vector2(165, 582)
 
-[node name="Sprite2D" parent="Background/HelpBook" index="0"]
+[node name="Sprite2D" parent="InteractibleButtons/HelpBook" index="0" unique_id=1549538798]
 material = SubResource("6")
 position = Vector2(0, -5)
 texture = ExtResource("22")
 
-[node name="CollisionShape2D" parent="Background/HelpBook" index="1"]
-shape = SubResource("7")
-
-[node name="Title" parent="Background/HelpBook" index="2"]
-offset_left = -28.0
-offset_top = -48.0
-offset_right = 12.0
-offset_bottom = -20.0
-text = "Help"
-
-[node name="Option" parent="Background" unique_id=1953564397 instance=ExtResource("18")]
+[node name="Option" parent="InteractibleButtons" unique_id=1953564397 instance=ExtResource("18")]
 unique_name_in_owner = true
 position = Vector2(111, 24)
 
-[node name="Sprite2D" parent="Background/Option" index="0"]
+[node name="Sprite2D" parent="InteractibleButtons/Option" index="0" unique_id=1549538798]
 texture = ExtResource("21")
 
-[node name="CollisionShape2D" parent="Background/Option" index="1"]
-position = Vector2(0, -1)
-shape = SubResource("8")
-
-[node name="Title" parent="Background/Option" index="2"]
-offset_left = -40.0
-offset_top = 25.0
-offset_right = 50.0
-offset_bottom = 53.0
-text = "Options"
-
-[node name="CoffeeCup" parent="Background" unique_id=251549362 instance=ExtResource("7")]
+[node name="CoffeeCup" parent="InteractibleButtons" unique_id=251549362 instance=ExtResource("7")]
 unique_name_in_owner = true
 position = Vector2(312, 576)
 
-[node name="LightSprite" type="Sprite2D" parent="Background" unique_id=302911203]
+[node name="Decoration" type="Node2D" parent="." unique_id=1747281126]
+
+[node name="front_sombre" type="Sprite2D" parent="Decoration" unique_id=116011017]
+scale = Vector2(3, 3)
+texture = ExtResource("17")
+centered = false
+
+[node name="LightSprite" type="Sprite2D" parent="Decoration" unique_id=302911203]
 scale = Vector2(3, 3)
 texture = ExtResource("16")
 centered = false
 hframes = 3
+
+[node name="LightTimer" type="Timer" parent="Decoration" unique_id=13000005]
+unique_name_in_owner = true
+wait_time = 0.5
+autostart = true
 
 [node name="CycleTimer" type="Timer" parent="." unique_id=1660228493]
 unique_name_in_owner = true
@@ -582,6 +386,7 @@ one_shot = true
 script = ExtResource("3")
 
 [node name="CycleManager" type="Control" parent="." unique_id=1310537701]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 362.844
@@ -732,6 +537,7 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("6")
 
 [node name="Credits" type="Control" parent="." unique_id=1022441581]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = -223.0
@@ -850,6 +656,7 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("6")
 
 [node name="GUI" type="Control" parent="." unique_id=1681617425]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 361.0
@@ -913,6 +720,7 @@ texture_pressed = ExtResource("26_q0dho")
 
 [node name="HelpScreen" type="Control" parent="." unique_id=1960344569]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 360.0
@@ -1057,6 +865,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="OptionPanel" type="Control" parent="." unique_id=38830670]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 26.0
@@ -1161,16 +970,12 @@ libraries/ = SubResource("AnimationLibrary_o11w0")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_u4tc0")
 
-[node name="LightTimer" type="Timer" parent="." unique_id=13000005]
-wait_time = 0.5
-autostart = true
-
-[connection signal="clicked" from="Background/Livre" to="." method="_on_Livre_clicked"]
-[connection signal="clicked" from="Background/Cafetiere" to="." method="_on_Cafetiere_clicked"]
-[connection signal="clicked" from="Background/HelpBook" to="." method="_on_HelpBook_clicked"]
-[connection signal="hoverred" from="Background/HelpBook" to="." method="_on_HelpBook_hoverred"]
-[connection signal="stop_hoverred" from="Background/HelpBook" to="." method="_on_HelpBook_stop_hoverred"]
-[connection signal="clicked" from="Background/Option" to="." method="_on_Option_clicked"]
+[connection signal="clicked" from="InteractibleButtons/Livre" to="." method="_on_Livre_clicked"]
+[connection signal="clicked" from="InteractibleButtons/Cafetiere" to="." method="_on_Cafetiere_clicked"]
+[connection signal="clicked" from="InteractibleButtons/HelpBook" to="." method="_on_HelpBook_clicked"]
+[connection signal="hoverred" from="InteractibleButtons/HelpBook" to="." method="_on_HelpBook_hoverred"]
+[connection signal="stop_hoverred" from="InteractibleButtons/HelpBook" to="." method="_on_HelpBook_stop_hoverred"]
+[connection signal="clicked" from="InteractibleButtons/Option" to="." method="_on_Option_clicked"]
 [connection signal="state_changed" from="CycleTimer" to="." method="_on_Timer_state_changed"]
 [connection signal="pressed" from="CycleManager/Panel/MarginContainer/VBoxContainer/ButtonValider" to="CycleManager" method="_on_ButtonValider_pressed"]
 [connection signal="pressed" from="CycleManager/Quit" to="." method="_on_Quit_Cycle_pressed"]
@@ -1182,18 +987,9 @@ autostart = true
 [connection signal="value_changed" from="OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="OptionPanel" method="_on_VolumeSlider_value_changed"]
 [connection signal="toggled" from="OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="OptionPanel" method="_on_BreakMusic_toggled"]
 [connection signal="pressed" from="OptionPanel/Quit" to="." method="_on_Quit_Options_pressed"]
-[connection signal="timeout" from="LightTimer" to="." method="_on_LightTimer_timeout"]
 
-[editable path="Background/Plan4"]
-[editable path="Background/Plan4/WindowManager"]
-[editable path="Background/Plan3"]
-[editable path="Background/Plan3/WindowManager"]
-[editable path="Background/Plan2"]
-[editable path="Background/Plan2/WindowManager"]
-[editable path="Background/Plan1"]
-[editable path="Background/Plan1/WindowManager"]
-[editable path="Background/Livre"]
-[editable path="Background/Cafetiere"]
-[editable path="Background/HelpBook"]
-[editable path="Background/Option"]
-[editable path="Background/CoffeeCup"]
+[editable path="InteractibleButtons/Livre"]
+[editable path="InteractibleButtons/Cafetiere"]
+[editable path="InteractibleButtons/HelpBook"]
+[editable path="InteractibleButtons/Option"]
+[editable path="InteractibleButtons/CoffeeCup"]

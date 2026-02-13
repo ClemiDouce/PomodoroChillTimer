@@ -33,7 +33,7 @@ func _on_MuteButton_pressed():
 	is_muted = not is_muted
 	if is_muted:
 		mute_button.texture_normal = music_off_sprite
-		MusicManager.music_level = 0
+		AudioManager.music_level = 0
 	else:
 		mute_button.texture_normal = music_on_sprite
-		MusicManager.music_level = 100
+		AudioManager.music_level = 100

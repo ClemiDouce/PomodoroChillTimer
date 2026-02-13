@@ -1,0 +1,1029 @@
+[gd_scene format=3 uid="uid://chhrv1epe0tbw"]
+
+[ext_resource type="PackedScene" uid="uid://dm6x3qg1836mp" path="res://background.tscn" id="1_3ectx"]
+[ext_resource type="Script" uid="uid://bh2ut52fev1gr" path="res://screen/main_screen/new_main_screen.gd" id="1_ppmac"]
+[ext_resource type="FontFile" path="res://assets/fonts/SmallPixelFont.tres" id="3_ny7tl"]
+[ext_resource type="Texture2D" uid="uid://djk8jy7buckh2" path="res://assets/sprite/GUI/cross.png" id="4_wtnci"]
+[ext_resource type="FontFile" path="res://assets/fonts/PixelFont.tres" id="5_1t4xr"]
+[ext_resource type="Texture2D" uid="uid://cjtanwwo4v8gn" path="res://assets/ui/button_square_depth_border.png" id="6_nyafg"]
+[ext_resource type="Script" uid="uid://5givprha30rs" path="res://src/Stages/OptionPanel.gd" id="7_e4yye"]
+[ext_resource type="Texture2D" uid="uid://bq4e28wchrjks" path="res://assets/ui/check_square_grey_checkmark.png" id="8_ad4v5"]
+[ext_resource type="Texture2D" uid="uid://b7p0et5bg0ev1" path="res://assets/ui/check_square_grey.png" id="9_j4pta"]
+[ext_resource type="Texture2D" uid="uid://ujq7qoupacg3" path="res://assets/sprite/GUI/pause.png" id="10_j4pta"]
+[ext_resource type="Texture2D" uid="uid://cgr7to4smnlce" path="res://assets/sprite/GUI/forward.png" id="11_e76ks"]
+[ext_resource type="Texture2D" uid="uid://dd0yvt4er3xd7" path="res://assets/sprite/GUI/musicOn.png" id="12_qfccc"]
+[ext_resource type="Texture2D" uid="uid://dubdgxp4lia7b" path="res://assets/sprite/GUI/musicOff.png" id="13_5pi0t"]
+[ext_resource type="Texture2D" uid="uid://c0al02im8q46r" path="res://assets/sprite/front_sombre.png" id="14_ad4v5"]
+[ext_resource type="Texture2D" uid="uid://cl4bykyq73dp5" path="res://assets/sprite/machine2.png" id="15_5pi0t"]
+[ext_resource type="Script" uid="uid://24yfo0k80qmo" path="res://content/coffee_machine/coffee_machine.gd" id="16_ekd82"]
+[ext_resource type="Texture2D" uid="uid://cvgjb0hlast8b" path="res://assets/sprite/lumiere-Sheet.png" id="16_ju2sf"]
+[ext_resource type="Texture2D" uid="uid://b43wt0psg47gp" path="res://assets/sprite/help_book.png" id="16_mf70w"]
+[ext_resource type="Texture2D" uid="uid://bi2mqv6fve1tu" path="res://assets/sprite/option_icon.png" id="17_ekd82"]
+[ext_resource type="Script" uid="uid://dp3nbfxurn1ip" path="res://screen/main_screen/interaction_area.gd" id="17_ju2sf"]
+[ext_resource type="Texture2D" uid="uid://lrdq84xvtp0l" path="res://assets/sprite/books_credit.png" id="18_ju2sf"]
+[ext_resource type="FontFile" uid="uid://m3slkepqolam" path="res://assets/fonts/m6x11.ttf" id="21_0tj6c"]
+[ext_resource type="Script" uid="uid://bl742ih1e0fsg" path="res://screen/main_screen/help_book_button.gd" id="21_jtx58"]
+[ext_resource type="Script" uid="uid://uxm1i0hagt62" path="res://content/cycle_manager/cycle_manager.gd" id="22_ju2sf"]
+[ext_resource type="Script" uid="uid://br6acrgllex3p" path="res://screen/main_screen/coffee_cup.gd" id="24_cl5hb"]
+[ext_resource type="Texture2D" uid="uid://b34nucmx3g7ua" path="res://assets/sprite/tasse.png" id="25_jtx58"]
+[ext_resource type="Texture2D" uid="uid://bavtxkca5yskj" path="res://assets/sprite/smoke.png" id="26_bfbtr"]
+
+[sub_resource type="GDScript" id="GDScript_0tj6c"]
+script/source = "extends Control
+
+@onready var cycle_input = %InputCycle
+@onready var short_input = %InputCourte
+@onready var long_input = %InputLongue
+@onready var work_input = %InputTravail
+
+func _on_ButtonValider_pressed():
+	if [
+		cycle_input.text,
+		short_input.text,
+		long_input.text,
+		work_input.text
+	].any(func(el: String): return el == \"\"):
+		return
+	var session_config = {
+		cycle_number = int(cycle_input.text), 
+		short_time = int(short_input.text) * 60, 
+		long_time = int(long_input.text) * 60, 
+		work_time = int(work_input.text) * 60
+	}
+	E.emit_signal(\"session_started\", session_config)
+"
+
+[sub_resource type="Theme" id="Theme_e76ks"]
+default_font = ExtResource("3_ny7tl")
+
+[sub_resource type="Theme" id="Theme_qfccc"]
+default_font = ExtResource("5_1t4xr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pi0t"]
+texture = ExtResource("6_nyafg")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="Theme" id="Theme_mf70w"]
+default_font = ExtResource("3_ny7tl")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekd82"]
+bg_color = Color(1, 0.38431373, 0.48235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ju2sf"]
+bg_color = Color(1, 0.5725419, 0.6169771, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tj6c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ppmac"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7jewp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl5hb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtx58"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jewp"]
+font = ExtResource("21_0tj6c")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_cl5hb"]
+font = ExtResource("21_0tj6c")
+font_size = 96
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtx58"]
+font = ExtResource("21_0tj6c")
+font_size = 30
+
+[sub_resource type="Shader" id="1"]
+code = "shader_type canvas_item;
+ 
+uniform float width;
+uniform vec4 outline_color : source_color;
+ 
+void fragment()
+{
+    vec2 size = (vec2(width) * TEXTURE_PIXEL_SIZE);
+   
+    vec4 sprite_color = texture(TEXTURE, UV);
+   
+    float alpha = sprite_color.a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(0.0, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, 0.0)).a;
+    alpha += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+   
+    vec3 final_color = mix(outline_color.rgb, sprite_color.rgb, sprite_color.a);
+    COLOR = vec4(final_color, clamp(alpha, 0.0, 1.0));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekd82"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/width = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekd82"]
+size = Vector2(31, 54.666656)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppmac"]
+line_spacing = 1.0
+font = ExtResource("21_0tj6c")
+shadow_size = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2sf"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/width = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju2sf"]
+size = Vector2(25.166668, 12.6666565)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tj6c"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/width = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pi0t"]
+size = Vector2(22.666664, 16.666668)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppmac"]
+resource_local_to_scene = true
+shader = SubResource("1")
+shader_parameter/width = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0tj6c"]
+size = Vector2(13.333336, 30)
+
+[sub_resource type="Animation" id="Animation_j4pta"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_e76ks"]
+resource_name = "default"
+length = 1.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfccc"]
+_data = {
+&"RESET": SubResource("Animation_j4pta"),
+&"default": SubResource("Animation_e76ks")
+}
+
+[sub_resource type="Animation" id="Animation_cl5hb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jtx58"]
+resource_name = "default"
+length = 1.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmokeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bfbtr"]
+_data = {
+&"RESET": SubResource("Animation_cl5hb"),
+&"default": SubResource("Animation_jtx58")
+}
+
+[node name="NewMainScreen" type="Node2D" unique_id=1519283705]
+script = ExtResource("1_ppmac")
+
+[node name="Background" parent="." unique_id=1902274042 instance=ExtResource("1_3ectx")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=928097212]
+
+[node name="Panels" type="Control" parent="UI" unique_id=2121947088]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CyclePanel" type="Control" parent="UI/Panels" unique_id=1890541630]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 362.844
+offset_top = 170.0
+offset_right = 581.0
+offset_bottom = 398.9997
+script = SubResource("GDScript_0tj6c")
+
+[node name="Panel" type="PanelContainer" parent="UI/Panels/CyclePanel" unique_id=1157501019]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 25.99939
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/CyclePanel/Panel" unique_id=1672721213]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer" unique_id=873764055]
+layout_mode = 2
+
+[node name="Titre" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=584913218]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+theme_override_font_sizes/font_size = 24
+text = "Session Creator"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1609348706]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=882446062]
+layout_mode = 2
+
+[node name="LabelCycle" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=223670614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Number of Cycles"
+horizontal_alignment = 1
+
+[node name="InputCycle" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1397507082]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
+theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+placeholder_text = "0"
+
+[node name="Spacer3" type="Control" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=2067541744]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1163699777]
+layout_mode = 2
+
+[node name="LabelTravail" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=144199627]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Work :"
+
+[node name="InputTravail" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=55908077]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
+theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+placeholder_text = "0"
+
+[node name="LabelTravail2" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=469824270]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "minutes"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=821868479]
+layout_mode = 2
+
+[node name="LabelPauseCourte" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=916307110]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Short Break :"
+
+[node name="InputCourte" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1055452871]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
+theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+placeholder_text = "0"
+
+[node name="LabelTravail3" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=802481042]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "minutes"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=75839929]
+layout_mode = 2
+
+[node name="LabelPauseLongue" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1017357485]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Long Break :"
+
+[node name="InputLongue" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1894511105]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
+theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+placeholder_text = "0"
+
+[node name="LabelTravail4" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=440003176]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "minutes"
+
+[node name="Spacer" type="Control" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=888589696]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonValider" type="Button" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1327495444]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Start"
+
+[node name="Quit" type="TextureButton" parent="UI/Panels/CyclePanel" unique_id=1421071589]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
+layout_mode = 0
+offset_left = 205.156
+offset_top = 8.0
+offset_right = 255.156
+offset_bottom = 58.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_wtnci")
+
+[node name="CreditsPanel" type="Control" parent="UI/Panels" unique_id=985677347]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -223.0
+offset_top = 161.0
+offset_right = -6.000168
+offset_bottom = 397.0
+theme = SubResource("Theme_e76ks")
+
+[node name="Panel" type="PanelContainer" parent="UI/Panels/CreditsPanel" unique_id=1790191411]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/CreditsPanel/Panel" unique_id=1089316426]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/CreditsPanel/Panel/MarginContainer" unique_id=943351913]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1633708710]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+
+[node name="Spacer" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1392811716]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Graphisme" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=641233999]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Art :"
+
+[node name="Graphiste" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=518577462]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Sieg"
+
+[node name="Spacer2" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1747468945]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Sound Design" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=22145517]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Sound Design :"
+
+[node name="Sound Designer" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1067942053]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Frerobin"
+
+[node name="Spacer3" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=547823017]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Code" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1223844520]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Code :"
+
+[node name="Coder" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1990935949]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Clementine @clemidev.itch.io"
+
+[node name="Spacer4" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1874601854]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Font" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=602994209]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Font : m6x11 by @managore"
+
+[node name="Spacer6" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1021964985]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Font2" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1250366808]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+text = "Icons and UI : Kenney"
+
+[node name="Spacer5" type="Control" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=500275107]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="SpecialThanks" type="Label" parent="UI/Panels/CreditsPanel/Panel/MarginContainer/VBoxContainer" unique_id=1455360290]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.5725419, 0.6169771, 1)
+theme_override_font_sizes/font_size = 12
+text = "Special Thanks : Mei, for using this tool !"
+
+[node name="Quit" type="TextureButton" parent="UI/Panels/CreditsPanel" unique_id=533547542]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.999847
+offset_top = 10.0
+offset_right = 13.000153
+offset_bottom = 60.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_wtnci")
+
+[node name="HelpScreen" type="Control" parent="UI/Panels" unique_id=1182440489]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 360.0
+offset_bottom = 600.0
+theme = SubResource("Theme_qfccc")
+
+[node name="ColorRect" type="ColorRect" parent="UI/Panels/HelpScreen" unique_id=1849246982]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_force_pass_scroll_events = false
+color = Color(0.0980392, 0.0901961, 0.0901961, 0.415686)
+
+[node name="Help" type="Label" parent="UI/Panels/HelpScreen" unique_id=70352199]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 572.0
+offset_right = 197.0
+offset_bottom = 600.0
+text = "HELP"
+
+[node name="Credits" type="Label" parent="UI/Panels/HelpScreen" unique_id=1754497160]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 509.0
+offset_right = 137.0
+offset_bottom = 537.0
+text = "Credits"
+
+[node name="Launch" type="Label" parent="UI/Panels/HelpScreen" unique_id=2089914871]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 445.0
+offset_right = 348.0
+offset_bottom = 535.0
+text = "Show
+Session
+Creator"
+
+[node name="Mute" type="Label" parent="UI/Panels/HelpScreen" unique_id=901333853]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 50.0
+offset_right = 353.0
+offset_bottom = 109.0
+text = "Mute
+Music"
+
+[node name="Stop" type="Label" parent="UI/Panels/HelpScreen" unique_id=639823640]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 50.0
+offset_right = 300.0
+offset_bottom = 109.0
+text = "Stop
+Session"
+horizontal_alignment = 2
+
+[node name="PausePlay" type="Label" parent="UI/Panels/HelpScreen" unique_id=1475486839]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 50.0
+offset_right = 241.0
+offset_bottom = 109.0
+text = "Pause
+Play
+Session"
+horizontal_alignment = 2
+
+[node name="State" type="Label" parent="UI/Panels/HelpScreen" unique_id=1517672201]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 140.0
+offset_right = 284.0
+offset_bottom = 158.0
+text = "Actual State"
+horizontal_alignment = 2
+
+[node name="Options" type="Label" parent="UI/Panels/HelpScreen" unique_id=2101619518]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 6.0
+offset_right = 154.0
+offset_bottom = 34.0
+text = "Options"
+
+[node name="HideHelp" type="Button" parent="UI/Panels/HelpScreen" unique_id=1191667755]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 561.0
+offset_right = 355.0
+offset_bottom = 595.0
+text = "Hide Help"
+
+[node name="WelcomeScreen" type="Control" parent="UI/Panels/HelpScreen" unique_id=846349483]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 17.0
+offset_top = 181.0
+offset_right = 330.0
+offset_bottom = 344.0
+
+[node name="WelcomePanel" type="PanelContainer" parent="UI/Panels/HelpScreen/WelcomeScreen" unique_id=78369479]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5pi0t")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel" unique_id=778824481]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer" unique_id=315022176]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1461521370]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "Welcome in Pomodoro Chill!"
+horizontal_alignment = 1
+
+[node name="Desc" type="Label" parent="UI/Panels/HelpScreen/WelcomeScreen/WelcomePanel/MarginContainer/VBoxContainer" unique_id=1216401491]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "This application allows you to practice the Pomodoro method, which involves sessions consisting of work cycles interspersed with breaks.
+To get started, click on the coffee pot and create your own session, then click on \"Start\" to get started!
+Work well and have fun!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OptionPanel" type="Control" parent="UI/Panels" unique_id=773018940]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 26.0
+offset_top = -143.0
+offset_right = 329.0
+offset_bottom = -5.000244
+theme = SubResource("Theme_mf70w")
+script = ExtResource("7_e4yye")
+
+[node name="Panel" type="PanelContainer" parent="UI/Panels/OptionPanel" unique_id=1328958351]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/OptionPanel/Panel" unique_id=1370554992]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer" unique_id=2000109417]
+layout_mode = 2
+
+[node name="Titre" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1081522449]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("5_1t4xr")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=229495259]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VolumeContainer" type="HBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=284874959]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1523609714]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Volume :"
+
+[node name="VolumeSlider" type="HSlider" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1944125441]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ekd82")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ju2sf")
+value = 50.0
+
+[node name="Spacer2" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=656281510]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BreakMusic" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1425956644]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_focus_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0tj6c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ppmac")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7jewp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cl5hb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jtx58")
+theme_override_icons/checked = ExtResource("8_ad4v5")
+theme_override_icons/unchecked = ExtResource("9_j4pta")
+text = "Pause the music during break"
+
+[node name="Quit" type="TextureButton" parent="UI/Panels/OptionPanel" unique_id=396645454]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = 8.0
+offset_right = 18.0
+offset_bottom = 58.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_wtnci")
+
+[node name="CycleManager" type="Control" parent="UI" unique_id=2142575820 node_paths=PackedStringArray("cycle_timer")]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("22_ju2sf")
+cycle_timer = NodePath("CycleTimer")
+
+[node name="CycleStatusLabel" type="Label" parent="UI/CycleManager" unique_id=1654148513]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 141.0
+offset_top = 89.0
+offset_right = 345.0
+offset_bottom = 176.0
+text = "No Current
+Session"
+label_settings = SubResource("LabelSettings_7jewp")
+vertical_alignment = 2
+visible_characters_behavior = 1
+
+[node name="Separator" type="ColorRect" parent="UI/CycleManager" unique_id=1580104855]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 176.0
+offset_right = 303.0
+offset_bottom = 180.0
+
+[node name="TimeLabel" type="Label" parent="UI/CycleManager" unique_id=1390654306]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 141.0
+offset_top = 191.0
+offset_right = 327.0
+offset_bottom = 275.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_cl5hb")
+
+[node name="MachineTimeLabel" type="Label" parent="UI/CycleManager" unique_id=1560367196]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 267.0
+offset_top = 428.0
+offset_right = 325.0
+offset_bottom = 455.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_jtx58")
+
+[node name="CycleTimer" type="Timer" parent="UI/CycleManager" unique_id=599274428]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="SessionControl" type="Control" parent="UI/CycleManager" unique_id=633899162]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 115.0
+grow_horizontal = 2
+
+[node name="SessionControlButtons" type="HBoxContainer" parent="UI/CycleManager/SessionControl" unique_id=858335581]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -82.5
+offset_right = 1.0
+offset_bottom = 75.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PauseButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=2120087247]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("10_j4pta")
+texture_pressed = ExtResource("11_e76ks")
+
+[node name="StopButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=282568805]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("4_wtnci")
+
+[node name="MuteButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=889870646]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("12_qfccc")
+texture_pressed = ExtResource("13_5pi0t")
+
+[node name="DecorationSprite" type="Sprite2D" parent="." unique_id=538535808]
+scale = Vector2(3, 3)
+texture = ExtResource("14_ad4v5")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="InteractibleButtons" type="Node2D" parent="." unique_id=1485355458]
+
+[node name="CoffeeMachineSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=2097527111]
+material = SubResource("ShaderMaterial_ekd82")
+position = Vector2(228, 396)
+scale = Vector2(3, 3)
+texture = ExtResource("15_5pi0t")
+centered = false
+hframes = 2
+script = ExtResource("16_ekd82")
+metadata/_edit_lock_ = true
+
+[node name="CoffeeMachineButton" type="Area2D" parent="InteractibleButtons/CoffeeMachineSprite" unique_id=999789670 node_paths=PackedStringArray("sprite", "action_label") groups=["clickable"]]
+unique_name_in_owner = true
+position = Vector2(23, 27.333334)
+script = ExtResource("17_ju2sf")
+sprite = NodePath("..")
+action_label = NodePath("../Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/CoffeeMachineSprite/CoffeeMachineButton" unique_id=957932371]
+position = Vector2(-0.5, 2.3333282)
+shape = SubResource("RectangleShape2D_ekd82")
+
+[node name="Label" type="Label" parent="InteractibleButtons/CoffeeMachineSprite" unique_id=1695450854]
+z_index = 1
+offset_left = 5.666668
+offset_top = -28.333334
+offset_right = 50.666668
+offset_bottom = 0.66666603
+text = "Start
+Cycle"
+label_settings = SubResource("LabelSettings_ppmac")
+
+[node name="HelpBookSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=356222585]
+material = SubResource("ShaderMaterial_ju2sf")
+position = Vector2(120, 555)
+scale = Vector2(3, 3)
+texture = ExtResource("16_mf70w")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="HelpBookButton" type="Area2D" parent="InteractibleButtons/HelpBookSprite" unique_id=1773428857 groups=["clickable"]]
+unique_name_in_owner = true
+position = Vector2(23, 27.333334)
+script = ExtResource("21_jtx58")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/HelpBookSprite/HelpBookButton" unique_id=768375225]
+position = Vector2(-8.25, -18.666672)
+shape = SubResource("RectangleShape2D_ju2sf")
+
+[node name="Label" type="Label" parent="InteractibleButtons/HelpBookSprite" unique_id=103305475]
+z_index = 1
+offset_left = 2.6666667
+offset_top = -17.333334
+offset_right = 26.666666
+offset_bottom = 5.666666
+text = "Help"
+label_settings = SubResource("LabelSettings_ppmac")
+
+[node name="OptionSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=1332015391]
+material = SubResource("ShaderMaterial_0tj6c")
+position = Vector2(75, -3)
+scale = Vector2(3, 3)
+texture = ExtResource("17_ekd82")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="OptionsButton" type="Area2D" parent="InteractibleButtons/OptionSprite" unique_id=1501067059 node_paths=PackedStringArray("sprite", "action_label") groups=["clickable"]]
+unique_name_in_owner = true
+position = Vector2(23, 27.333334)
+script = ExtResource("17_ju2sf")
+sprite = NodePath("..")
+action_label = NodePath("../Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/OptionSprite/OptionsButton" unique_id=1347400678]
+position = Vector2(-11.333332, -18.333334)
+shape = SubResource("RectangleShape2D_5pi0t")
+
+[node name="Label" type="Label" parent="InteractibleButtons/OptionSprite" unique_id=1742411839]
+z_index = 1
+offset_left = -22.0
+offset_top = 17.0
+offset_right = 23.0
+offset_bottom = 40.0
+text = "Options"
+label_settings = SubResource("LabelSettings_ppmac")
+
+[node name="BookSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=1491048636]
+material = SubResource("ShaderMaterial_ppmac")
+position = Vector2(63, 474)
+scale = Vector2(3, 3)
+texture = ExtResource("18_ju2sf")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="CreditsButton" type="Area2D" parent="InteractibleButtons/BookSprite" unique_id=1162839726 node_paths=PackedStringArray("sprite", "action_label") groups=["clickable"]]
+unique_name_in_owner = true
+position = Vector2(23, 27.333334)
+script = ExtResource("17_ju2sf")
+sprite = NodePath("..")
+action_label = NodePath("../Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/BookSprite/CreditsButton" unique_id=1446521581]
+position = Vector2(-13.999994, -11.3333435)
+shape = SubResource("RectangleShape2D_0tj6c")
+
+[node name="Label" type="Label" parent="InteractibleButtons/BookSprite" unique_id=1612547023]
+z_index = 1
+offset_left = -12.333333
+offset_top = -15.333334
+offset_right = 32.666668
+offset_bottom = 7.666666
+text = "Credits"
+label_settings = SubResource("LabelSettings_ppmac")
+
+[node name="LightNode" type="Node2D" parent="." unique_id=721297774]
+metadata/_edit_lock_ = true
+
+[node name="LightSprite" type="Sprite2D" parent="LightNode" unique_id=2061634443]
+scale = Vector2(3, 3)
+texture = ExtResource("16_ju2sf")
+centered = false
+hframes = 3
+metadata/_edit_lock_ = true
+
+[node name="LightAnimationPlayer" type="AnimationPlayer" parent="LightNode" unique_id=1314799410]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_qfccc")
+autoplay = &"default"
+speed_scale = 0.5
+
+[node name="CoffeeCup" type="Node2D" parent="." unique_id=2080059730]
+scale = Vector2(3, 3)
+script = ExtResource("24_cl5hb")
+
+[node name="CupSprite" type="Sprite2D" parent="CoffeeCup" unique_id=1411253360]
+unique_name_in_owner = true
+position = Vector2(106.666664, 190)
+texture = ExtResource("25_jtx58")
+hframes = 2
+
+[node name="SmokeSprite" type="Sprite2D" parent="CoffeeCup" unique_id=289692941]
+unique_name_in_owner = true
+position = Vector2(97.666664, 108)
+texture = ExtResource("26_bfbtr")
+centered = false
+hframes = 3
+
+[node name="SmokeAnimationPlayer" type="AnimationPlayer" parent="CoffeeCup" unique_id=351076971]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_bfbtr")
+autoplay = &"default"
+speed_scale = 0.7
+
+[connection signal="pressed" from="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/ButtonValider" to="UI/Panels/CyclePanel" method="_on_ButtonValider_pressed"]
+[connection signal="value_changed" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="UI/Panels/OptionPanel" method="_on_VolumeSlider_value_changed"]
+[connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="UI/Panels/OptionPanel" method="_on_BreakMusic_toggled"]
+[connection signal="toggled" from="UI/CycleManager/SessionControl/SessionControlButtons/PauseButton" to="UI/CycleManager" method="_on_pause_button_toggled"]
+[connection signal="pressed" from="UI/CycleManager/SessionControl/SessionControlButtons/StopButton" to="UI/CycleManager" method="_on_stop_button_pressed"]
+[connection signal="toggled" from="UI/CycleManager/SessionControl/SessionControlButtons/MuteButton" to="UI/CycleManager" method="_on_mute_button_toggled"]

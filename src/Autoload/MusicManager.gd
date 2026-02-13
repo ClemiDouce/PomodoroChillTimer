@@ -68,12 +68,6 @@ func set_music_level(new_level: float):
 		var mapped_level = Utils.remap_range(music_level, 0, 100, - 60, 0)
 		AudioServer.set_bus_volume_db(MUSIC_BUS_INDEX, mapped_level)
 
-func _on_music_player_finished():
-	if self.paused == true:
-		return
-	if music_player.stream == music_intro:
-		music_player.stream = music_loop
-		music_player.play()
 
 func play_sound(sound_to_play: String):
 	match (sound_to_play):

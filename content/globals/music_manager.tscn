@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://o1vydcmd52fm"]
+
+[ext_resource type="Script" uid="uid://dh56wd3jra8jh" path="res://content/globals/music_manager.gd" id="1_5527g"]
+[ext_resource type="AudioStream" uid="uid://dj41enc5hpftp" path="res://assets/music/music_intro.ogg" id="2_wkm87"]
+
+[node name="MusicManager" type="Node" unique_id=1841159473]
+script = ExtResource("1_5527g")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=275054110]
+unique_name_in_owner = true
+stream = ExtResource("2_wkm87")
+bus = &"Music"
+
+[node name="CycleChangePlayer" type="AudioStreamPlayer" parent="." unique_id=1828868608]
+unique_name_in_owner = true
+bus = &"Sound"
+
+[node name="InterfaceSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1864543487]
+unique_name_in_owner = true
+bus = &"Sound"

@@ -17,7 +17,7 @@ extends Node2D
 @onready var welcome_screen_parent: Control = %WelcomeScreen
 @onready var welcome_text_panel: PanelContainer = %WelcomePanel
 
-
+# Interactibles
 @onready var book_credit: Area2D = %Livre
 @onready var cafetiere: Area2D = %Cafetiere
 @onready var book_help: Area2D = %HelpBook
@@ -74,22 +74,22 @@ func _on_Timer_state_changed(new_state):
 		0:
 			coffee_cup.toggle(false)
 			cafetiere_sprite.frame = 0
-			MusicManager.stop_music()
-			if not MusicManager.sound_player.playing:
-				MusicManager.play_sound("session_finish")
+			AudioManager.stop_music()
+			if not AudioManager.sound_player.playing:
+				AudioManager.play_sound("session_finish")
 		1:
 			coffee_cup.toggle(false)
 			cafetiere_sprite.frame = 1
-			MusicManager.play_sound("work_cycle")
-			if MusicManager.pause_break:
-				MusicManager.music_in()
+			AudioManager.play_sound("work_cycle")
+			if AudioManager.pause_break:
+				AudioManager.music_in()
 			
 		2, 3:
 			coffee_cup.toggle(true)
 			cafetiere_sprite.frame = 0
-			MusicManager.play_sound("pause_cycle")
-			if MusicManager.pause_break:
-				MusicManager.music_out()
+			AudioManager.play_sound("pause_cycle")
+			if AudioManager.pause_break:
+				AudioManager.music_out()
 
 
 func _on_LightTimer_timeout():
@@ -144,16 +144,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_Quit_Credits_pressed():
 	credits_out()
-	MusicManager.play_interface_sound("button")
+	AudioManager.play_interface_sound("button")
 
 func _on_Quit_Cycle_pressed():
 	cycle_out()
-	MusicManager.play_interface_sound("button")
+	AudioManager.play_interface_sound("button")
 	
 
 func _on_Quit_Options_pressed():
 	options_out()
-	MusicManager.play_interface_sound("button")
+	AudioManager.play_interface_sound("button")
 	
 
 
@@ -166,7 +166,7 @@ func _on_HelpBook_stop_hoverred():
 
 
 func _on_HideHelp_pressed():
-	MusicManager.play_interface_sound("button")
+	AudioManager.play_interface_sound("button")
 	if cycle_timer.actual_cycle_type == 0:
 		stop_button.hide()
 	welcome_text_panel.hide()

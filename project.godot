@@ -11,16 +11,21 @@ config_version=5
 [application]
 
 config/name="PomodoroGodot"
-run/main_scene="res://src/Stages/World.tscn"
+run/main_scene="uid://chhrv1epe0tbw"
 config/features=PackedStringArray("4.6")
 config/icon="res://assets/icon/smallest_timer_icon.png"
 config/windows_native_icon="res://assets/icon/smallest_timer_icon.ico"
 
+[audio]
+
+buses/default_bus_layout="uid://bvcrtdhhodjud"
+
 [autoload]
 
 E="*res://src/Autoload/EventBus.gd"
-MusicManager="*res://src/Autoload/MusicManager.gd"
 Utils="*res://src/Autoload/Utils.gd"
+Config="*uid://3p3mukasbudw"
+AudioManager="*uid://o1vydcmd52fm"
 
 [display]
 

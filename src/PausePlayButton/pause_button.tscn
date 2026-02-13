@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dlcohwqisqrow"]
-
-[node name="PauseButton" type="TextureButton" unique_id=2114760933]
-offset_right = 40.0
-offset_bottom = 40.0
