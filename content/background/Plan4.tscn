@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene format=2]
 
-[ext_resource path="res://src/WindowManager/WindowManager.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Window/Window.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/sprite/plans/4eme_plan.png" type="Texture2D" id=4]
+[ext_resource type="PackedScene" path="res://content/background/WindowManager/WindowManager.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://content/background/Window/Window.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cuu403mccnevx" path="res://assets/sprite/plans/4eme_plan.png" id="4"]
 
 [node name="Plan4" type="Node2D"]
 

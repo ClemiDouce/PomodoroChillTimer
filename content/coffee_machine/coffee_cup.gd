@@ -5,7 +5,7 @@ extends Node2D
 @onready var smoke_animation_player: AnimationPlayer = %SmokeAnimationPlayer
 
 func _ready() -> void:
-	E.pomo_changed_state.connect(_on_pomo_changed_state)
+	Pomo.pomo_changed_state.connect(_on_pomo_changed_state)
 	cup_sprite.frame = 1
 	smoke_sprite.hide()
 	

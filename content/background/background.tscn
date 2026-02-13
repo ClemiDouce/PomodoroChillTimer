@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dm6x3qg1836mp"]
 
-[ext_resource type="PackedScene" path="res://Plan4.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://Plan3.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bk7nnnpllf8mb" path="res://Plan1.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://Plan2.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/Stars/Star.tscn" id="5_eq6nc"]
+[ext_resource type="PackedScene" path="res://content/background/Plan4.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://content/background/Plan3.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bk7nnnpllf8mb" path="res://content/background/Plan1.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://content/background/Plan2.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://content/background/Stars/Star.tscn" id="5_eq6nc"]
 
 [node name="Background" type="Node2D" unique_id=1464212973]
 

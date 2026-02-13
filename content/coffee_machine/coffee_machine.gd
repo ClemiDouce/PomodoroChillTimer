@@ -1,7 +1,7 @@
 extends Sprite2D
 
 func _ready() -> void:
-	E.pomo_changed_state.connect(_on_pomo_changed_state)
+	Pomo.pomo_changed_state.connect(_on_pomo_changed_state)
 	
 func _on_pomo_changed_state(new_state: Pomo.State):
 	match(new_state):

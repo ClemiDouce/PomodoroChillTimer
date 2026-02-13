@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bk7nnnpllf8mb"]
 
-[ext_resource type="PackedScene" path="res://src/WindowManager/WindowManager.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/Window/Window.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://content/background/WindowManager/WindowManager.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://content/background/Window/Window.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dayfctp0o0ds8" path="res://assets/sprite/plans/1er_plan.png" id="3"]
 
 [node name="Plan1" type="Node2D" unique_id=126373302]

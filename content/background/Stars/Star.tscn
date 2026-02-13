@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene format=2]
 
-[ext_resource path="res://src/Stars/Star.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprite/etoile.png" type="Texture2D" id=2]
+[ext_resource type="Script" uid="uid://65uyblot7uub" path="res://content/background/Stars/Star.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bteqriajw8olh" path="res://assets/sprite/etoile.png" id="2"]
 
 [node name="Star" type="Sprite2D"]
 scale = Vector2( 3, 3 )

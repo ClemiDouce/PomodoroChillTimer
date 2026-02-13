@@ -22,8 +22,7 @@ buses/default_bus_layout="uid://bvcrtdhhodjud"
 
 [autoload]
 
-E="*res://src/Autoload/EventBus.gd"
-Utils="*res://src/Autoload/Utils.gd"
+Pomo="*uid://cpt7x83sjj6ma"
 Config="*uid://3p3mukasbudw"
 AudioManager="*uid://o1vydcmd52fm"
 

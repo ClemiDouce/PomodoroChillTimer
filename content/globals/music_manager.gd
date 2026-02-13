@@ -94,5 +94,9 @@ func play_interface_sound(sound_to_play: InterfaceSound):
 # Settings
 func set_music_level(new_level: float):
 	music_level = new_level
-	var mapped_level = Utils.remap_range(music_level, 0, 100, - 60, 0)
+	var mapped_level = remap_range(music_level, 0, 100, - 60, 0)
 	AudioServer.set_bus_volume_db(MUSIC_BUS_INDEX, mapped_level)
+
+func remap_range(value, InputA, InputB, OutputA, OutputB):
+	var result = (value - InputA) / (InputB - InputA) * (OutputB - OutputA) + OutputA
+	return result

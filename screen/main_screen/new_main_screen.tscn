@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://chhrv1epe0tbw"]
 
-[ext_resource type="PackedScene" uid="uid://dm6x3qg1836mp" path="res://background.tscn" id="1_3ectx"]
+[ext_resource type="PackedScene" uid="uid://dm6x3qg1836mp" path="res://content/background/background.tscn" id="1_3ectx"]
 [ext_resource type="Script" uid="uid://bh2ut52fev1gr" path="res://screen/main_screen/new_main_screen.gd" id="1_ppmac"]
 [ext_resource type="FontFile" path="res://assets/fonts/SmallPixelFont.tres" id="3_ny7tl"]
 [ext_resource type="Texture2D" uid="uid://djk8jy7buckh2" path="res://assets/sprite/GUI/cross.png" id="4_wtnci"]
 [ext_resource type="FontFile" path="res://assets/fonts/PixelFont.tres" id="5_1t4xr"]
+[ext_resource type="Script" uid="uid://b5g2ndu7u6bbj" path="res://content/panels/credits_panel.gd" id="5_fmb51"]
+[ext_resource type="Script" uid="uid://bmitvdp74pu6n" path="res://content/component/quit_button_panel.gd" id="5_mlxjn"]
 [ext_resource type="Texture2D" uid="uid://cjtanwwo4v8gn" path="res://assets/ui/button_square_depth_border.png" id="6_nyafg"]
-[ext_resource type="Script" uid="uid://5givprha30rs" path="res://src/Stages/OptionPanel.gd" id="7_e4yye"]
+[ext_resource type="Script" uid="uid://5givprha30rs" path="res://content/panels/option_panel.gd" id="7_e4yye"]
 [ext_resource type="Texture2D" uid="uid://bq4e28wchrjks" path="res://assets/ui/check_square_grey_checkmark.png" id="8_ad4v5"]
 [ext_resource type="Texture2D" uid="uid://b7p0et5bg0ev1" path="res://assets/ui/check_square_grey.png" id="9_j4pta"]
 [ext_resource type="Texture2D" uid="uid://ujq7qoupacg3" path="res://assets/sprite/GUI/pause.png" id="10_j4pta"]
 [ext_resource type="Texture2D" uid="uid://cgr7to4smnlce" path="res://assets/sprite/GUI/forward.png" id="11_e76ks"]
+[ext_resource type="Script" uid="uid://iy7dtwrphb0m" path="res://content/component/session_control.gd" id="12_bfbtr"]
 [ext_resource type="Texture2D" uid="uid://dd0yvt4er3xd7" path="res://assets/sprite/GUI/musicOn.png" id="12_qfccc"]
 [ext_resource type="Texture2D" uid="uid://dubdgxp4lia7b" path="res://assets/sprite/GUI/musicOff.png" id="13_5pi0t"]
 [ext_resource type="Texture2D" uid="uid://c0al02im8q46r" path="res://assets/sprite/front_sombre.png" id="14_ad4v5"]
@@ -19,52 +22,178 @@
 [ext_resource type="Texture2D" uid="uid://cvgjb0hlast8b" path="res://assets/sprite/lumiere-Sheet.png" id="16_ju2sf"]
 [ext_resource type="Texture2D" uid="uid://b43wt0psg47gp" path="res://assets/sprite/help_book.png" id="16_mf70w"]
 [ext_resource type="Texture2D" uid="uid://bi2mqv6fve1tu" path="res://assets/sprite/option_icon.png" id="17_ekd82"]
-[ext_resource type="Script" uid="uid://dp3nbfxurn1ip" path="res://screen/main_screen/interaction_area.gd" id="17_ju2sf"]
+[ext_resource type="Script" uid="uid://dp3nbfxurn1ip" path="res://content/component/interaction_area.gd" id="17_ju2sf"]
 [ext_resource type="Texture2D" uid="uid://lrdq84xvtp0l" path="res://assets/sprite/books_credit.png" id="18_ju2sf"]
 [ext_resource type="FontFile" uid="uid://m3slkepqolam" path="res://assets/fonts/m6x11.ttf" id="21_0tj6c"]
-[ext_resource type="Script" uid="uid://bl742ih1e0fsg" path="res://screen/main_screen/help_book_button.gd" id="21_jtx58"]
-[ext_resource type="Script" uid="uid://uxm1i0hagt62" path="res://content/cycle_manager/cycle_manager.gd" id="22_ju2sf"]
-[ext_resource type="Script" uid="uid://br6acrgllex3p" path="res://screen/main_screen/coffee_cup.gd" id="24_cl5hb"]
+[ext_resource type="Script" uid="uid://uxm1i0hagt62" path="res://content/pomo_display/pomo_display.gd" id="22_ju2sf"]
+[ext_resource type="Script" uid="uid://br6acrgllex3p" path="res://content/coffee_machine/coffee_cup.gd" id="24_cl5hb"]
 [ext_resource type="Texture2D" uid="uid://b34nucmx3g7ua" path="res://assets/sprite/tasse.png" id="25_jtx58"]
 [ext_resource type="Texture2D" uid="uid://bavtxkca5yskj" path="res://assets/sprite/smoke.png" id="26_bfbtr"]
 
-[sub_resource type="GDScript" id="GDScript_0tj6c"]
-script/source = "extends Control
+[sub_resource type="Animation" id="Animation_bfbtr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CreditsPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-223, 161)]
+}
 
-@onready var cycle_input = %InputCycle
-@onready var short_input = %InputCourte
-@onready var long_input = %InputLongue
-@onready var work_input = %InputTravail
+[sub_resource type="Animation" id="Animation_fmb51"]
+resource_name = "opt_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CreditsPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(-223, 161), Vector2(12, 161)]
+}
 
-func _on_ButtonValider_pressed():
-	if [
-		cycle_input.text,
-		short_input.text,
-		long_input.text,
-		work_input.text
-	].any(func(el: String): return el == \"\"):
-		return
-	var session_config = {
-		cycle_number = int(cycle_input.text), 
-		short_time = int(short_input.text) * 60, 
-		long_time = int(long_input.text) * 60, 
-		work_time = int(work_input.text) * 60
-	}
-	E.emit_signal(\"session_started\", session_config)
-"
+[sub_resource type="Animation" id="Animation_mlxjn"]
+resource_name = "opt_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CreditsPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(12, 161), Vector2(-223, 161)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jd6gy"]
+_data = {
+&"RESET": SubResource("Animation_bfbtr"),
+&"opt_in": SubResource("Animation_fmb51"),
+&"opt_out": SubResource("Animation_mlxjn")
+}
+
+[sub_resource type="Animation" id="Animation_jd6gy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(26, -143)]
+}
+
+[sub_resource type="Animation" id="Animation_ehmk6"]
+resource_name = "opt_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(26, -143), Vector2(26, 65)]
+}
+
+[sub_resource type="Animation" id="Animation_5edtc"]
+resource_name = "opt_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%OptionPanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(26, 65), Vector2(26, -143)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wh45n"]
+_data = {
+&"RESET": SubResource("Animation_jd6gy"),
+&"opt_in": SubResource("Animation_ehmk6"),
+&"opt_out": SubResource("Animation_5edtc")
+}
+
+[sub_resource type="Animation" id="Animation_wh45n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CyclePanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(362.844, 170)]
+}
+
+[sub_resource type="Animation" id="Animation_ckd1m"]
+resource_name = "opt_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CyclePanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(362.844, 170), Vector2(108, 170)]
+}
+
+[sub_resource type="Animation" id="Animation_ddl4x"]
+resource_name = "opt_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CyclePanel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.37892923, 1),
+"update": 0,
+"values": [Vector2(108, 170), Vector2(362.844, 170)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sbhjy"]
+_data = {
+&"RESET": SubResource("Animation_wh45n"),
+&"opt_in": SubResource("Animation_ckd1m"),
+&"opt_out": SubResource("Animation_ddl4x")
+}
 
 [sub_resource type="Theme" id="Theme_e76ks"]
 default_font = ExtResource("3_ny7tl")
-
-[sub_resource type="Theme" id="Theme_qfccc"]
-default_font = ExtResource("5_1t4xr")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pi0t"]
-texture = ExtResource("6_nyafg")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 12.0
 
 [sub_resource type="Theme" id="Theme_mf70w"]
 default_font = ExtResource("3_ny7tl")
@@ -84,6 +213,16 @@ bg_color = Color(1, 0.5725419, 0.6169771, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cl5hb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtx58"]
+
+[sub_resource type="Theme" id="Theme_qfccc"]
+default_font = ExtResource("5_1t4xr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5pi0t"]
+texture = ExtResource("6_nyafg")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 12.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jewp"]
 font = ExtResource("21_0tj6c")
@@ -248,20 +387,30 @@ script = ExtResource("1_ppmac")
 [node name="UI" type="CanvasLayer" parent="." unique_id=928097212]
 
 [node name="Panels" type="Control" parent="UI" unique_id=2121947088]
-visible = false
+z_index = 10
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+
+[node name="CreditAnimation" type="AnimationPlayer" parent="UI/Panels" unique_id=1644127489]
+unique_name_in_owner = true
+root_node = NodePath("../CyclePanel")
+libraries/ = SubResource("AnimationLibrary_jd6gy")
+
+[node name="OptionAnimation" type="AnimationPlayer" parent="UI/Panels" unique_id=225640829]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_wh45n")
+
+[node name="PomoAnimation" type="AnimationPlayer" parent="UI/Panels" unique_id=1417347269]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_sbhjy")
 
 [node name="CyclePanel" type="Control" parent="UI/Panels" unique_id=1890541630]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 362.844
 offset_top = 170.0
-offset_right = 581.0
+offset_right = 581.00006
 offset_bottom = 398.9997
-script = SubResource("GDScript_0tj6c")
 
 [node name="Panel" type="PanelContainer" parent="UI/Panels/CyclePanel" unique_id=1157501019]
 layout_mode = 1
@@ -295,37 +444,38 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=882446062]
+[node name="GridContainer" type="GridContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1481289591]
 layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
 
-[node name="LabelCycle" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=223670614]
+[node name="LabelCycle" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=223670614]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
-text = "Number of Cycles"
+text = "Cycles:"
 horizontal_alignment = 1
 
-[node name="InputCycle" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1397507082]
+[node name="InputCycle" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1397507082]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
 theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 placeholder_text = "0"
 
-[node name="Spacer3" type="Control" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=2067541744]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=1163699777]
-layout_mode = 2
-
-[node name="LabelTravail" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=144199627]
+[node name="LabelTravail" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=144199627]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "Work :"
 
-[node name="InputTravail" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=55908077]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1163699777]
+layout_mode = 2
+
+[node name="InputTravail" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=55908077]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
@@ -333,22 +483,22 @@ theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.501
 theme_override_fonts/font = ExtResource("3_ny7tl")
 placeholder_text = "0"
 
-[node name="LabelTravail2" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=469824270]
+[node name="LabelTravail2" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2" unique_id=469824270]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "minutes"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=821868479]
-layout_mode = 2
-
-[node name="LabelPauseCourte" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=916307110]
+[node name="LabelPauseCourte" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=916307110]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "Short Break :"
 
-[node name="InputCourte" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1055452871]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=821868479]
+layout_mode = 2
+
+[node name="InputCourte" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=1055452871]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
@@ -356,30 +506,36 @@ theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.501
 theme_override_fonts/font = ExtResource("3_ny7tl")
 placeholder_text = "0"
 
-[node name="LabelTravail3" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=802481042]
+[node name="LabelTravail3" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3" unique_id=802481042]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "minutes"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer" unique_id=75839929]
-layout_mode = 2
-
-[node name="LabelPauseLongue" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1017357485]
+[node name="LabelPauseLongue" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=1017357485]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 text = "Long Break :"
 
-[node name="InputLongue" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1894511105]
+[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer" unique_id=75839929]
+layout_mode = 2
+
+[node name="InputLongue" type="LineEdit" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=1894511105]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.38431373, 0.48235294, 1)
 theme_override_colors/font_placeholder_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
 placeholder_text = "0"
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
 
-[node name="LabelTravail4" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=440003176]
+[node name="LabelTravail4" type="Label" parent="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/GridContainer/HBoxContainer4" unique_id=440003176]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_fonts/font = ExtResource("3_ny7tl")
@@ -403,8 +559,9 @@ offset_right = 255.156
 offset_bottom = 58.0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("4_wtnci")
+script = ExtResource("5_mlxjn")
 
-[node name="CreditsPanel" type="Control" parent="UI/Panels" unique_id=985677347]
+[node name="CreditsPanel" type="Control" parent="UI/Panels" unique_id=985677347 node_paths=PackedStringArray("animation_panel")]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = -223.0
@@ -412,6 +569,8 @@ offset_top = 161.0
 offset_right = -6.000168
 offset_bottom = 397.0
 theme = SubResource("Theme_e76ks")
+script = ExtResource("5_fmb51")
+animation_panel = NodePath("../CreditAnimation")
 
 [node name="Panel" type="PanelContainer" parent="UI/Panels/CreditsPanel" unique_id=1790191411]
 layout_mode = 1
@@ -521,9 +680,130 @@ offset_bottom = 60.0
 grow_horizontal = 0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("4_wtnci")
+script = ExtResource("5_mlxjn")
+
+[node name="OptionPanel" type="Control" parent="UI/Panels" unique_id=773018940 node_paths=PackedStringArray("animation_panel")]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 26.0
+offset_top = -143.0
+offset_right = 329.0
+offset_bottom = -12.0
+theme = SubResource("Theme_mf70w")
+script = ExtResource("7_e4yye")
+animation_panel = NodePath("../OptionAnimation")
+
+[node name="Panel" type="PanelContainer" parent="UI/Panels/OptionPanel" unique_id=1328958351]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -15.0
+offset_right = 2.0
+offset_bottom = -0.99975586
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/OptionPanel/Panel" unique_id=1370554992]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer" unique_id=2000109417]
+layout_mode = 2
+
+[node name="Titre" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1081522449]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("5_1t4xr")
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=229495259]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VolumeContainer" type="HBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=284874959]
+layout_mode = 2
+
+[node name="Volume" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1523609714]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("3_ny7tl")
+text = "Volume :"
+
+[node name="VolumeSlider" type="HSlider" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1944125441]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ekd82")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ju2sf")
+value = 50.0
+scrollable = false
+
+[node name="Spacer2" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=656281510]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BreakMusic" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1425956644]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_focus_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0tj6c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ppmac")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7jewp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cl5hb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jtx58")
+theme_override_icons/checked = ExtResource("8_ad4v5")
+theme_override_icons/unchecked = ExtResource("9_j4pta")
+text = "Pause the music during break"
+
+[node name="OldTimerStyle" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1184942592]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_focus_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0tj6c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ppmac")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7jewp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cl5hb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jtx58")
+theme_override_icons/checked = ExtResource("8_ad4v5")
+theme_override_icons/unchecked = ExtResource("9_j4pta")
+text = "Old Timer Style"
+
+[node name="Quit" type="TextureButton" parent="UI/Panels/OptionPanel" unique_id=396645454]
+modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -10.0
+offset_right = 18.0
+offset_bottom = 40.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_wtnci")
+script = ExtResource("5_mlxjn")
 
 [node name="HelpScreen" type="Control" parent="UI/Panels" unique_id=1182440489]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_right = 360.0
 offset_bottom = 600.0
@@ -592,15 +872,6 @@ Play
 Session"
 horizontal_alignment = 2
 
-[node name="State" type="Label" parent="UI/Panels/HelpScreen" unique_id=1517672201]
-layout_mode = 0
-offset_left = 197.0
-offset_top = 140.0
-offset_right = 284.0
-offset_bottom = 158.0
-text = "Actual State"
-horizontal_alignment = 2
-
 [node name="Options" type="Label" parent="UI/Panels/HelpScreen" unique_id=2101619518]
 layout_mode = 0
 offset_left = 64.0
@@ -666,100 +937,7 @@ Work well and have fun!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="OptionPanel" type="Control" parent="UI/Panels" unique_id=773018940]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 26.0
-offset_top = -143.0
-offset_right = 329.0
-offset_bottom = -5.000244
-theme = SubResource("Theme_mf70w")
-script = ExtResource("7_e4yye")
-
-[node name="Panel" type="PanelContainer" parent="UI/Panels/OptionPanel" unique_id=1328958351]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Panels/OptionPanel/Panel" unique_id=1370554992]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer" unique_id=2000109417]
-layout_mode = 2
-
-[node name="Titre" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1081522449]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("5_1t4xr")
-theme_override_font_sizes/font_size = 24
-text = "Options"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Spacer" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=229495259]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VolumeContainer" type="HBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=284874959]
-layout_mode = 2
-
-[node name="Volume" type="Label" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1523609714]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_fonts/font = ExtResource("3_ny7tl")
-text = "Volume :"
-
-[node name="VolumeSlider" type="HSlider" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer" unique_id=1944125441]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ekd82")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ju2sf")
-value = 50.0
-
-[node name="Spacer2" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=656281510]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="BreakMusic" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1425956644]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_colors/font_focus_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_colors/font_hover_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_0tj6c")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ppmac")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_7jewp")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cl5hb")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_jtx58")
-theme_override_icons/checked = ExtResource("8_ad4v5")
-theme_override_icons/unchecked = ExtResource("9_j4pta")
-text = "Pause the music during break"
-
-[node name="Quit" type="TextureButton" parent="UI/Panels/OptionPanel" unique_id=396645454]
-modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -32.0
-offset_top = 8.0
-offset_right = 18.0
-offset_bottom = 58.0
-grow_horizontal = 0
-scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("4_wtnci")
-
-[node name="CycleManager" type="Control" parent="UI" unique_id=2142575820 node_paths=PackedStringArray("cycle_timer")]
+[node name="PomoDisplay" type="Control" parent="UI" unique_id=2142575820]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -769,9 +947,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("22_ju2sf")
-cycle_timer = NodePath("CycleTimer")
 
-[node name="CycleStatusLabel" type="Label" parent="UI/CycleManager" unique_id=1654148513]
+[node name="CycleStatusLabel" type="Label" parent="UI/PomoDisplay" unique_id=1654148513]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 141.0
@@ -784,14 +961,14 @@ label_settings = SubResource("LabelSettings_7jewp")
 vertical_alignment = 2
 visible_characters_behavior = 1
 
-[node name="Separator" type="ColorRect" parent="UI/CycleManager" unique_id=1580104855]
+[node name="Separator" type="ColorRect" parent="UI/PomoDisplay" unique_id=1580104855]
 layout_mode = 0
 offset_left = 141.0
 offset_top = 176.0
 offset_right = 303.0
 offset_bottom = 180.0
 
-[node name="TimeLabel" type="Label" parent="UI/CycleManager" unique_id=1390654306]
+[node name="TimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1390654306]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 141.0
@@ -801,7 +978,7 @@ offset_bottom = 275.0
 text = "00:00"
 label_settings = SubResource("LabelSettings_cl5hb")
 
-[node name="MachineTimeLabel" type="Label" parent="UI/CycleManager" unique_id=1560367196]
+[node name="MachineTimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1560367196]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -812,34 +989,30 @@ offset_bottom = 455.0
 text = "00:00"
 label_settings = SubResource("LabelSettings_jtx58")
 
-[node name="CycleTimer" type="Timer" parent="UI/CycleManager" unique_id=599274428]
+[node name="CycleTimer" type="Timer" parent="UI/PomoDisplay" unique_id=599274428]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="SessionControl" type="Control" parent="UI/CycleManager" unique_id=633899162]
+[node name="SessionControl" type="Control" parent="UI" unique_id=633899162]
 unique_name_in_owner = true
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 50.0
-offset_bottom = 115.0
+offset_bottom = 65.0
 grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("12_bfbtr")
 
-[node name="SessionControlButtons" type="HBoxContainer" parent="UI/CycleManager/SessionControl" unique_id=858335581]
+[node name="SessionControlButtons" type="HBoxContainer" parent="UI/SessionControl" unique_id=858335581]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -157.0
-offset_top = -82.5
-offset_right = 1.0
-offset_bottom = 75.5
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
+alignment = 2
 
-[node name="PauseButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=2120087247]
+[node name="PauseButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=2120087247]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -847,19 +1020,21 @@ toggle_mode = true
 texture_normal = ExtResource("10_j4pta")
 texture_pressed = ExtResource("11_e76ks")
 
-[node name="StopButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=282568805]
+[node name="StopButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=282568805]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 texture_normal = ExtResource("4_wtnci")
 
-[node name="MuteButton" type="TextureButton" parent="UI/CycleManager/SessionControl/SessionControlButtons" unique_id=889870646]
+[node name="MuteButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=889870646]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 toggle_mode = true
 texture_normal = ExtResource("12_qfccc")
 texture_pressed = ExtResource("13_5pi0t")
+
+[node name="PanelAnimator" type="Node" parent="UI" unique_id=372048392]
 
 [node name="DecorationSprite" type="Sprite2D" parent="." unique_id=538535808]
 scale = Vector2(3, 3)
@@ -892,12 +1067,12 @@ shape = SubResource("RectangleShape2D_ekd82")
 
 [node name="Label" type="Label" parent="InteractibleButtons/CoffeeMachineSprite" unique_id=1695450854]
 z_index = 1
-offset_left = 5.666668
+offset_left = -2.999999
 offset_top = -28.333334
-offset_right = 50.666668
+offset_right = 42.0
 offset_bottom = 0.66666603
 text = "Start
-Cycle"
+Session"
 label_settings = SubResource("LabelSettings_ppmac")
 
 [node name="HelpBookSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=356222585]
@@ -911,13 +1086,13 @@ metadata/_edit_lock_ = true
 [node name="HelpBookButton" type="Area2D" parent="InteractibleButtons/HelpBookSprite" unique_id=1773428857 groups=["clickable"]]
 unique_name_in_owner = true
 position = Vector2(23, 27.333334)
-script = ExtResource("21_jtx58")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/HelpBookSprite/HelpBookButton" unique_id=768375225]
 position = Vector2(-8.25, -18.666672)
 shape = SubResource("RectangleShape2D_ju2sf")
 
 [node name="Label" type="Label" parent="InteractibleButtons/HelpBookSprite" unique_id=103305475]
+visible = false
 z_index = 1
 offset_left = 2.6666667
 offset_top = -17.333334
@@ -1022,8 +1197,12 @@ autoplay = &"default"
 speed_scale = 0.7
 
 [connection signal="pressed" from="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/ButtonValider" to="UI/Panels/CyclePanel" method="_on_ButtonValider_pressed"]
-[connection signal="value_changed" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="UI/Panels/OptionPanel" method="_on_VolumeSlider_value_changed"]
-[connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="UI/Panels/OptionPanel" method="_on_BreakMusic_toggled"]
-[connection signal="toggled" from="UI/CycleManager/SessionControl/SessionControlButtons/PauseButton" to="UI/CycleManager" method="_on_pause_button_toggled"]
-[connection signal="pressed" from="UI/CycleManager/SessionControl/SessionControlButtons/StopButton" to="UI/CycleManager" method="_on_stop_button_pressed"]
-[connection signal="toggled" from="UI/CycleManager/SessionControl/SessionControlButtons/MuteButton" to="UI/CycleManager" method="_on_mute_button_toggled"]
+[connection signal="pressed" from="UI/Panels/CyclePanel/Quit" to="UI/Panels/CyclePanel" method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Panels/CreditsPanel/Quit" to="UI/Panels/CreditsPanel" method="_on_quit_pressed"]
+[connection signal="value_changed" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="UI/Panels/OptionPanel" method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="UI/Panels/OptionPanel" method="_on_break_music_toggled"]
+[connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/OldTimerStyle" to="UI/Panels/OptionPanel" method="_on_old_timer_style_toggled"]
+[connection signal="pressed" from="UI/Panels/OptionPanel/Quit" to="UI/Panels/OptionPanel" method="_on_quit_pressed"]
+[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/PauseButton" to="UI/SessionControl" method="_on_pause_button_toggled"]
+[connection signal="pressed" from="UI/SessionControl/SessionControlButtons/StopButton" to="UI/SessionControl" method="_on_stop_button_pressed"]
+[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/MuteButton" to="UI/SessionControl" method="_on_mute_button_toggled"]
