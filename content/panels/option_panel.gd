@@ -17,6 +17,8 @@ func _on_break_music_toggled(toggled: bool):
 func _on_old_timer_style_toggled(toggled_on: bool) -> void:
 	Config.big_timer = !toggled_on
 
+func _on_status_scroll_toggled(toggled_on: bool) -> void:
+	Config.status_scroll = toggled_on
 
 func _on_quit_pressed() -> void:
 	animation_panel.play("opt_out")

@@ -6,7 +6,7 @@ class_name PomodoroDisplay extends Node
 @onready var machine_time_label: Label = %MachineTimeLabel
 
 var state_label : Dictionary[Pomo.State, String] = {
-	Pomo.State.NONE: "No\nSession",
+	Pomo.State.NONE: "No Current\nSession",
 	Pomo.State.SHORT: "Short\nBreak",
 	Pomo.State.LONG: "Long\nBreak",
 	Pomo.State.WORK: "Work"
@@ -31,11 +31,13 @@ func _process(_delta: float) -> void:
 # Display
 
 func set_state_label(state: Pomo.State):
-	var text_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	text_tween.tween_property(status_label, "visible_ratio", 0, 1.)
-	text_tween.tween_callback(func(): status_label.text = state_label.get(state))
-	text_tween.tween_property(status_label, "visible_ratio", 1, 1.2)
-	
+	if Config.status_scroll:
+		var text_tween = create_tween()
+		text_tween.tween_property(status_label, "visible_ratio", 0, 0.5)
+		text_tween.tween_callback(func(): status_label.text = state_label.get(state))
+		text_tween.tween_property(status_label, "visible_ratio", 1, 0.5)
+	else:
+		status_label.text = state_label.get(state)
 
 # Signals
 func on_pomo_state_changed(new_state: Pomo.State):

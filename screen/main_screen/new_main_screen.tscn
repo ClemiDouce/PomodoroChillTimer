@@ -32,6 +32,19 @@
 [ext_resource type="Script" uid="uid://br6acrgllex3p" path="res://content/coffee_machine/coffee_cup.gd" id="24_cl5hb"]
 [ext_resource type="Texture2D" uid="uid://b34nucmx3g7ua" path="res://assets/sprite/tasse.png" id="25_jtx58"]
 [ext_resource type="Texture2D" uid="uid://bavtxkca5yskj" path="res://assets/sprite/smoke.png" id="26_bfbtr"]
+[ext_resource type="LabelSettings" uid="uid://bupjqkps7a0il" path="res://assets/theme/interaction_area_label.tres" id="29_5edtc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jewp"]
+font = ExtResource("21_0tj6c")
+font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_cl5hb"]
+font = ExtResource("21_0tj6c")
+font_size = 96
+
+[sub_resource type="LabelSettings" id="LabelSettings_jtx58"]
+font = ExtResource("21_0tj6c")
+font_size = 30
 
 [sub_resource type="Animation" id="Animation_bfbtr"]
 length = 0.001
@@ -99,7 +112,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(26, -143)]
+"values": [Vector2(26, -165)]
 }
 
 [sub_resource type="Animation" id="Animation_ehmk6"]
@@ -115,7 +128,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.37892923, 1),
 "update": 0,
-"values": [Vector2(26, -143), Vector2(26, 65)]
+"values": [Vector2(26, -165), Vector2(26, 65)]
 }
 
 [sub_resource type="Animation" id="Animation_5edtc"]
@@ -131,7 +144,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.37892923, 1),
 "update": 0,
-"values": [Vector2(26, 65), Vector2(26, -143)]
+"values": [Vector2(26, 65), Vector2(26, -165)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wh45n"]
@@ -236,18 +249,6 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_5edtc"]
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_7jewp"]
-font = ExtResource("21_0tj6c")
-font_size = 48
-
-[sub_resource type="LabelSettings" id="LabelSettings_cl5hb"]
-font = ExtResource("21_0tj6c")
-font_size = 96
-
-[sub_resource type="LabelSettings" id="LabelSettings_jtx58"]
-font = ExtResource("21_0tj6c")
-font_size = 30
-
 [sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
  
@@ -282,11 +283,6 @@ shader_parameter/outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekd82"]
 size = Vector2(31, 54.666656)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ppmac"]
-line_spacing = 1.0
-font = ExtResource("21_0tj6c")
-shadow_size = 0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ju2sf"]
 resource_local_to_scene = true
@@ -397,6 +393,101 @@ script = ExtResource("1_ppmac")
 [node name="Background" parent="." unique_id=1902274042 instance=ExtResource("1_3ectx")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=928097212]
+
+[node name="SessionControl" type="Control" parent="UI" unique_id=633899162]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 65.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("12_bfbtr")
+
+[node name="SessionControlButtons" type="HBoxContainer" parent="UI/SessionControl" unique_id=858335581]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="PauseButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=2120087247]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("10_j4pta")
+texture_pressed = ExtResource("11_e76ks")
+
+[node name="StopButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=282568805]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("4_wtnci")
+
+[node name="MuteButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=889870646]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("12_qfccc")
+texture_pressed = ExtResource("13_5pi0t")
+
+[node name="PomoDisplay" type="Control" parent="UI" unique_id=2142575820]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("22_ju2sf")
+
+[node name="CycleStatusLabel" type="Label" parent="UI/PomoDisplay" unique_id=1654148513]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 147.0
+offset_top = 65.0
+offset_right = 351.0
+offset_bottom = 152.0
+text = "No Current
+Session"
+label_settings = SubResource("LabelSettings_7jewp")
+horizontal_alignment = 2
+vertical_alignment = 2
+visible_characters_behavior = 1
+
+[node name="Separator" type="ColorRect" parent="UI/PomoDisplay" unique_id=1580104855]
+visible = false
+layout_mode = 0
+offset_left = 141.0
+offset_top = 176.0
+offset_right = 303.0
+offset_bottom = 180.0
+
+[node name="TimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1390654306]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 171.0
+offset_top = 163.0
+offset_right = 357.0
+offset_bottom = 247.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_cl5hb")
+
+[node name="MachineTimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1560367196]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 267.0
+offset_top = 428.0
+offset_right = 325.0
+offset_bottom = 455.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_jtx58")
 
 [node name="Panels" type="Control" parent="UI" unique_id=2121947088]
 z_index = 10
@@ -704,9 +795,9 @@ script = ExtResource("5_mlxjn")
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 26.0
-offset_top = -143.0
+offset_top = -165.0
 offset_right = 329.0
-offset_bottom = -12.0
+offset_bottom = -34.0
 theme = SubResource("Theme_mf70w")
 script = ExtResource("7_e4yye")
 animation_panel = NodePath("../OptionAnimation")
@@ -743,8 +834,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=229495259]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="VolumeContainer" type="HBoxContainer" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=284874959]
 layout_mode = 2
@@ -765,8 +856,8 @@ value = 50.0
 scrollable = false
 
 [node name="Spacer2" type="Control" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=656281510]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="BreakMusic" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=1425956644]
 unique_name_in_owner = true
@@ -804,6 +895,24 @@ theme_override_icons/checked = ExtResource("8_ad4v5")
 theme_override_icons/unchecked = ExtResource("9_j4pta")
 text = "Old Timer Style"
 
+[node name="StatusScroll" type="CheckBox" parent="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer" unique_id=13740535]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_focus_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0tj6c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ppmac")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7jewp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cl5hb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jtx58")
+theme_override_icons/checked = ExtResource("8_ad4v5")
+theme_override_icons/unchecked = ExtResource("9_j4pta")
+text = "Session Status scrolling"
+
 [node name="Quit" type="TextureButton" parent="UI/Panels/OptionPanel" unique_id=396645454]
 modulate = Color(0.5019608, 0.5019608, 0.5019608, 1)
 layout_mode = 1
@@ -811,9 +920,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -32.0
-offset_top = -10.0
+offset_top = -36.0
 offset_right = 18.0
-offset_bottom = 40.0
+offset_bottom = 14.0
 grow_horizontal = 0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("4_wtnci")
@@ -821,6 +930,7 @@ script = ExtResource("5_mlxjn")
 
 [node name="WelcomeScreen" type="Control" parent="UI/Panels" unique_id=846349483]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 0
 offset_left = 17.0
 offset_top = 181.0
@@ -995,101 +1105,6 @@ offset_right = 360.0
 offset_bottom = 50.0
 texture = ExtResource("12_qfccc")
 
-[node name="PomoDisplay" type="Control" parent="UI" unique_id=2142575820]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("22_ju2sf")
-
-[node name="CycleStatusLabel" type="Label" parent="UI/PomoDisplay" unique_id=1654148513]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 141.0
-offset_top = 89.0
-offset_right = 345.0
-offset_bottom = 176.0
-text = "No Current
-Session"
-label_settings = SubResource("LabelSettings_7jewp")
-vertical_alignment = 2
-visible_characters_behavior = 1
-
-[node name="Separator" type="ColorRect" parent="UI/PomoDisplay" unique_id=1580104855]
-layout_mode = 0
-offset_left = 141.0
-offset_top = 176.0
-offset_right = 303.0
-offset_bottom = 180.0
-
-[node name="TimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1390654306]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 141.0
-offset_top = 191.0
-offset_right = 327.0
-offset_bottom = 275.0
-text = "00:00"
-label_settings = SubResource("LabelSettings_cl5hb")
-
-[node name="MachineTimeLabel" type="Label" parent="UI/PomoDisplay" unique_id=1560367196]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 267.0
-offset_top = 428.0
-offset_right = 325.0
-offset_bottom = 455.0
-text = "00:00"
-label_settings = SubResource("LabelSettings_jtx58")
-
-[node name="SessionControl" type="Control" parent="UI" unique_id=633899162]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 65.0
-grow_horizontal = 2
-mouse_filter = 2
-script = ExtResource("12_bfbtr")
-
-[node name="SessionControlButtons" type="HBoxContainer" parent="UI/SessionControl" unique_id=858335581]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 2
-
-[node name="PauseButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=2120087247]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-toggle_mode = true
-texture_normal = ExtResource("10_j4pta")
-texture_pressed = ExtResource("11_e76ks")
-
-[node name="StopButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=282568805]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-texture_normal = ExtResource("4_wtnci")
-
-[node name="MuteButton" type="TextureButton" parent="UI/SessionControl/SessionControlButtons" unique_id=889870646]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-toggle_mode = true
-texture_normal = ExtResource("12_qfccc")
-texture_pressed = ExtResource("13_5pi0t")
-
-[node name="PanelAnimator" type="Node" parent="UI" unique_id=372048392]
-
 [node name="DecorationSprite" type="Sprite2D" parent="." unique_id=538535808]
 scale = Vector2(3, 3)
 texture = ExtResource("14_ad4v5")
@@ -1113,21 +1128,11 @@ unique_name_in_owner = true
 position = Vector2(23, 27.333334)
 script = ExtResource("17_ju2sf")
 sprite = NodePath("..")
-action_label = NodePath("../Label")
+action_label = NodePath("../../StartSessionLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/CoffeeMachineSprite/CoffeeMachineButton" unique_id=957932371]
 position = Vector2(-0.5, 2.3333282)
 shape = SubResource("RectangleShape2D_ekd82")
-
-[node name="Label" type="Label" parent="InteractibleButtons/CoffeeMachineSprite" unique_id=1695450854]
-z_index = 1
-offset_left = -2.999999
-offset_top = -28.333334
-offset_right = 42.0
-offset_bottom = 0.66666603
-text = "Start
-Session"
-label_settings = SubResource("LabelSettings_ppmac")
 
 [node name="HelpBookSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=356222585]
 material = SubResource("ShaderMaterial_ju2sf")
@@ -1142,20 +1147,11 @@ unique_name_in_owner = true
 position = Vector2(23, 27.333334)
 script = ExtResource("17_ju2sf")
 sprite = NodePath("..")
-action_label = NodePath("../Label")
+action_label = NodePath("../../HelpLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/HelpBookSprite/HelpBookButton" unique_id=768375225]
 position = Vector2(-8.25, -18.666672)
 shape = SubResource("RectangleShape2D_ju2sf")
-
-[node name="Label" type="Label" parent="InteractibleButtons/HelpBookSprite" unique_id=103305475]
-z_index = 1
-offset_left = 2.6666667
-offset_top = -11.0
-offset_right = 26.666666
-offset_bottom = 12.0
-text = "Help"
-label_settings = SubResource("LabelSettings_ppmac")
 
 [node name="OptionSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=1332015391]
 material = SubResource("ShaderMaterial_0tj6c")
@@ -1170,20 +1166,11 @@ unique_name_in_owner = true
 position = Vector2(23, 27.333334)
 script = ExtResource("17_ju2sf")
 sprite = NodePath("..")
-action_label = NodePath("../Label")
+action_label = NodePath("../../OptionLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/OptionSprite/OptionsButton" unique_id=1347400678]
 position = Vector2(-11.333332, -18.333334)
 shape = SubResource("RectangleShape2D_5pi0t")
-
-[node name="Label" type="Label" parent="InteractibleButtons/OptionSprite" unique_id=1742411839]
-z_index = 1
-offset_left = -22.0
-offset_top = 17.0
-offset_right = 23.0
-offset_bottom = 40.0
-text = "Options"
-label_settings = SubResource("LabelSettings_ppmac")
 
 [node name="BookSprite" type="Sprite2D" parent="InteractibleButtons" unique_id=1491048636]
 material = SubResource("ShaderMaterial_ppmac")
@@ -1198,20 +1185,48 @@ unique_name_in_owner = true
 position = Vector2(23, 27.333334)
 script = ExtResource("17_ju2sf")
 sprite = NodePath("..")
-action_label = NodePath("../Label")
+action_label = NodePath("../../CreditLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractibleButtons/BookSprite/CreditsButton" unique_id=1446521581]
 position = Vector2(-13.999994, -11.3333435)
 shape = SubResource("RectangleShape2D_0tj6c")
 
-[node name="Label" type="Label" parent="InteractibleButtons/BookSprite" unique_id=1612547023]
+[node name="StartSessionLabel" type="Label" parent="InteractibleButtons" unique_id=1695450854]
 z_index = 1
-offset_left = -12.333333
-offset_top = -15.333334
-offset_right = 32.666668
-offset_bottom = 7.666666
+offset_left = 248.0
+offset_top = 341.0
+offset_right = 338.0
+offset_bottom = 398.0
+text = "Start
+Session"
+label_settings = ExtResource("29_5edtc")
+
+[node name="HelpLabel" type="Label" parent="InteractibleButtons" unique_id=103305475]
+z_index = 1
+offset_left = 137.0
+offset_top = 532.0
+offset_right = 185.0
+offset_bottom = 560.0
+text = "Help"
+label_settings = ExtResource("29_5edtc")
+
+[node name="OptionLabel" type="Label" parent="InteractibleButtons" unique_id=1742411839]
+z_index = 1
+offset_left = 67.0
+offset_top = 57.0
+offset_right = 157.0
+offset_bottom = 85.0
+text = "Options"
+label_settings = ExtResource("29_5edtc")
+
+[node name="CreditLabel" type="Label" parent="InteractibleButtons" unique_id=1612547023]
+z_index = 1
+offset_left = 46.0
+offset_top = 445.0
+offset_right = 136.0
+offset_bottom = 473.0
 text = "Credits"
-label_settings = SubResource("LabelSettings_ppmac")
+label_settings = ExtResource("29_5edtc")
 
 [node name="LightNode" type="Node2D" parent="." unique_id=721297774]
 metadata/_edit_lock_ = true
@@ -1252,14 +1267,15 @@ libraries/ = SubResource("AnimationLibrary_bfbtr")
 autoplay = &"default"
 speed_scale = 0.7
 
+[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/PauseButton" to="UI/SessionControl" method="_on_pause_button_toggled"]
+[connection signal="pressed" from="UI/SessionControl/SessionControlButtons/StopButton" to="UI/SessionControl" method="_on_stop_button_pressed"]
+[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/MuteButton" to="UI/SessionControl" method="_on_mute_button_toggled"]
 [connection signal="pressed" from="UI/Panels/CyclePanel/Panel/MarginContainer/VBoxContainer/ValidateButton" to="UI/Panels/CyclePanel" method="_on_validate_button_pressed"]
 [connection signal="pressed" from="UI/Panels/CyclePanel/QuitButton" to="UI/Panels/CyclePanel" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/Panels/CreditsPanel/Quit" to="UI/Panels/CreditsPanel" method="_on_quit_pressed"]
 [connection signal="value_changed" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/VolumeContainer/VolumeSlider" to="UI/Panels/OptionPanel" method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/BreakMusic" to="UI/Panels/OptionPanel" method="_on_break_music_toggled"]
 [connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/OldTimerStyle" to="UI/Panels/OptionPanel" method="_on_old_timer_style_toggled"]
+[connection signal="toggled" from="UI/Panels/OptionPanel/Panel/MarginContainer/VBoxContainer/StatusScroll" to="UI/Panels/OptionPanel" method="_on_status_scroll_toggled"]
 [connection signal="pressed" from="UI/Panels/OptionPanel/Quit" to="UI/Panels/OptionPanel" method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Panels/WelcomeScreen/Quit" to="UI/Panels/WelcomeScreen" method="_on_quit_pressed"]
-[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/PauseButton" to="UI/SessionControl" method="_on_pause_button_toggled"]
-[connection signal="pressed" from="UI/SessionControl/SessionControlButtons/StopButton" to="UI/SessionControl" method="_on_stop_button_pressed"]
-[connection signal="toggled" from="UI/SessionControl/SessionControlButtons/MuteButton" to="UI/SessionControl" method="_on_mute_button_toggled"]

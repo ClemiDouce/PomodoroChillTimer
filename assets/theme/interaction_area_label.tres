@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bupjqkps7a0il"]
+
+[ext_resource type="FontFile" uid="uid://m3slkepqolam" path="res://assets/fonts/m6x11.ttf" id="1_3v1bi"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_3v1bi")
+font_size = 32
+shadow_size = 0
